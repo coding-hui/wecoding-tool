@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>top.wecoding</groupId>
+    <artifactId>wecoding-bom</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+
+    <description>WeCoding Tool 统一依赖管理</description>
+
+    <properties>
+        <wecoding.version>0.0.1</wecoding.version>
+        <java.version>1.8</java.version>
+
+        <spring-boot.version>2.6.7</spring-boot.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+
+        <alibaba.nacos.version>2.0.3</alibaba.nacos.version>
+        <spring-boot-admin.version>2.6.3</spring-boot-admin.version>
+        <security.oauth.version>2.6.3</security.oauth.version>
+
+        <mysql.connector.version>8.0.22</mysql.connector.version>
+        <druid.version>1.2.8</druid.version>
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <dynamic-datasource.version>3.5.1</dynamic-datasource.version>
+
+        <velocity.version>2.3</velocity.version>
+        <velocity-tools.version>3.1</velocity-tools.version>
+        <justauth.version>1.16.3</justauth.version>
+        <justauth.springboot.version>1.4.0</justauth.springboot.version>
+        <hutool.version>5.7.19</hutool.version>
+        <fastjson.version>1.2.79</fastjson.version>
+        <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
+        <jjwt.version>0.9.1</jjwt.version>
+
+        <swagger.fox.version>3.0.0</swagger.fox.version>
+        <swagger.core.version>1.6.2</swagger.core.version>
+        <git.commit.plugin>2.2.5</git.commit.plugin>
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- SpringBoot 依赖配置 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Alibaba Nacos 配置 -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${alibaba.nacos.version}</version>
+            </dependency>
+
+            <!-- spring oauth2 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${security.oauth.version}</version>
+            </dependency>
+
+            <!--  SpringBoot 监控客户端 -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!-- SpringBoot 监控服务端-->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!-- MySQL -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+
+            <!-- MyBatisPlus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!-- MyBatisPlus 注解 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!-- MyBatisPlus 扩展 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!-- Druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- Dynamic DataSource -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+
+            <!-- Velocity 模板引擎 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- Velocity Tools  -->
+            <dependency>
+                <groupId>org.apache.velocity.tools</groupId>
+                <artifactId>velocity-tools-generic</artifactId>
+                <version>${velocity-tools.version}</version>
+            </dependency>
+
+            <!-- SpringBoot JustAuth -->
+            <dependency>
+                <groupId>com.xkcoding.justauth</groupId>
+                <artifactId>justauth-spring-boot-starter</artifactId>
+                <version>${justauth.springboot.version}</version>
+            </dependency>
+
+            <!-- JustAuth -->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justauth.version}</version>
+            </dependency>
+
+            <!-- HuTool 工具类 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-extra</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-http</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 线程传递值 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- Swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.fox.version}</version>
+            </dependency>
+
+            <!-- 通用核心模块 -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-core</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
+            <!--            &lt;!&ndash; 全局配置 Mybatis &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-mybatis</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 安全模块 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-security</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 接口文档 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-swagger</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 日志记录 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-log</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 数据源 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-datasource</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; Seata &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-seata</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; RocketMQ &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-rocketmq</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; RabbitMQ &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-rabbit</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 缓存模块 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-cache</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; Feign &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-feign</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; Web 模块 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-web</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; MongoDB &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-mongodb</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 文件存储 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-storage</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 微服务模块 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-common-cloud</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+            <!--            &lt;!&ndash; 系统模块接口 &ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>top.wecoding</groupId>-->
+            <!--                <artifactId>wecoding-system-api</artifactId>-->
+            <!--                <version>${wecoding.version}</version>-->
+            <!--            </dependency>-->
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git.commit.plugin}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

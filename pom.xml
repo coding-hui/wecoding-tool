@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>top.wecoding</groupId>
+    <artifactId>wecoding-tool</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
+
+    <modules>
+        <module>wecoding-core</module>
+        <module>wecoding-database</module>
+    </modules>
+
+    <name>wecoding-tool</name>
+    <description>WeCoding 核心工具</description>
+
+    <properties>
+        <wecoding.version>0.0.1</wecoding.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <spring-boot.version>2.6.6</spring-boot.version>
+
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven.plugin.version>3.10.1</maven.plugin.version>
+        <maven.resource.version>3.2.1</maven.resource.version>
+
+        <docker.plugin.version>0.39.1</docker.plugin.version>
+        <docker.host>tcp://192.168.43.120:2375</docker.host>
+        <docker.registry>registry.hub.docker.com</docker.registry>
+        <docker.namespace>wecoding</docker.namespace>
+        <docker.username>wecoding</docker.username>
+        <docker.password>Qwer123456!@#</docker.password>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-bom</artifactId>
+                <version>${wecoding.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
