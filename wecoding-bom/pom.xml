@@ -229,6 +229,13 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
+            <!-- Redis 缓存模块 -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-redis</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
             <!--            &lt;!&ndash; 全局配置 Mybatis &ndash;&gt;-->
             <!--            <dependency>-->
             <!--                <groupId>top.wecoding</groupId>-->
@@ -236,12 +243,12 @@
             <!--                <version>${wecoding.version}</version>-->
             <!--            </dependency>-->
 
-            <!--            &lt;!&ndash; 安全模块 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-security</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- 安全模块 -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-security</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
             <!--            &lt;!&ndash; 接口文档 &ndash;&gt;-->
             <!--            <dependency>-->
@@ -285,19 +292,12 @@
             <!--                <version>${wecoding.version}</version>-->
             <!--            </dependency>-->
 
-            <!--            &lt;!&ndash; 缓存模块 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-cache</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; Feign &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-feign</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Feign -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-feign</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
             <!--            &lt;!&ndash; Web 模块 &ndash;&gt;-->
             <!--            <dependency>-->
