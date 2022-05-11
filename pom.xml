@@ -17,6 +17,8 @@
         <module>wecoding-starter-redis</module>
         <module>wecoding-starter-feign</module>
         <module>wecoding-starter-mybatis</module>
+        <module>wecoding-starter-cloud</module>
+        <module>wecoding-starter-log</module>
     </modules>
 
     <name>wecoding-tool</name>

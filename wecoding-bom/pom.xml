@@ -109,6 +109,13 @@
                 <version>${mysql.connector.version}</version>
             </dependency>
 
+            <!--Mybatis-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
             <!-- MyBatisPlus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
