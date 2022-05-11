@@ -16,6 +16,7 @@
         <module>wecoding-starter-security</module>
         <module>wecoding-starter-redis</module>
         <module>wecoding-starter-feign</module>
+        <module>wecoding-starter-mybatis</module>
     </modules>
 
     <name>wecoding-tool</name>
