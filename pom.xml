@@ -12,6 +12,7 @@
     <modules>
         <module>wecoding-core</module>
         <module>wecoding-database</module>
+        <module>wecoding-starter-web</module>
     </modules>
 
     <name>wecoding-tool</name>
