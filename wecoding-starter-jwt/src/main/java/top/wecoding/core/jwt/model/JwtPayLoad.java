@@ -1,4 +1,4 @@
-package top.wecoding.core.model.jwt;
+package top.wecoding.core.jwt.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class JwtPayLoad {
 
     /**
-     * 信息类型
+     * 令牌类型
      */
     private String tokenType;
 

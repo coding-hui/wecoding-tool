@@ -1,7 +1,7 @@
 package top.wecoding.core.security.service;
 
+import top.wecoding.core.jwt.model.TokenInfo;
 import top.wecoding.core.model.LoginUser;
-import top.wecoding.core.model.TokenInfo;
 import top.wecoding.core.security.provider.ClientDetails;
 
 import javax.servlet.http.HttpServletRequest;

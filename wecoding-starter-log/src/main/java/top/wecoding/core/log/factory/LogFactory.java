@@ -1,6 +1,7 @@
 package top.wecoding.core.log.factory;
 
 import top.wecoding.core.log.annotation.Log;
+import top.wecoding.core.log.entity.SysOpLog;
 
 /**
  * 日志对象创建工厂

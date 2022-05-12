@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.ReflectionException;
-import top.wecoding.common.core.constant.StrPool;
-import top.wecoding.common.core.context.login.LoginContextHolder;
+import top.wecoding.core.constant.StrPool;
+import top.wecoding.core.context.login.LoginContextHolder;
 
 import java.util.Date;
 

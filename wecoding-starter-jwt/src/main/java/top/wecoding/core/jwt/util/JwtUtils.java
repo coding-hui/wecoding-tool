@@ -1,4 +1,4 @@
-package top.wecoding.core.util;
+package top.wecoding.core.jwt.util;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateTime;
@@ -14,8 +14,9 @@ import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
-import top.wecoding.core.model.jwt.JwtPayLoad;
+import top.wecoding.core.jwt.model.JwtPayLoad;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,7 +73,11 @@ public class JwtUtils {
      */
     public static Claims parseToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(TokenConstant.SING_KEY).parseClaimsJws(token).getBody();
+            return Jwts.parserBuilder()
+                    .setSigningKey(Base64.getDecoder().decode(TokenConstant.SING_KEY))
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
         } catch (Exception e) {
             throw new UnauthorizedException(ClientErrorCodeEnum.PARSE_TOKEN_ERROR);
         }

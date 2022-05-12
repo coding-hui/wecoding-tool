@@ -1,4 +1,4 @@
-package top.wecoding.core.model;
+package top.wecoding.core.jwt.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -24,19 +24,26 @@ public class TokenInfo {
 
     @ApiModelProperty(value = "令牌")
     private String accessToken;
+
     @ApiModelProperty(value = "令牌类型")
     private String tokenType;
+
     @ApiModelProperty(value = "刷新令牌")
     private String refreshToken;
+
     @ApiModelProperty(value = "用户ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
+
     @ApiModelProperty(value = "头像")
     private String avatar;
+
     @ApiModelProperty(value = "账号名")
     private String account;
+
     @ApiModelProperty(value = "过期时间")
     private long expiresIn;
+
     @ApiModelProperty(value = "许可证")
     private String license = SecurityConstants.PROJECT_LICENSE;
 

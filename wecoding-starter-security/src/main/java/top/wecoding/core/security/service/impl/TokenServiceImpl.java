@@ -10,13 +10,13 @@ import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
+import top.wecoding.core.jwt.model.JwtPayLoad;
+import top.wecoding.core.jwt.model.TokenInfo;
+import top.wecoding.core.jwt.util.JwtUtils;
 import top.wecoding.core.model.LoginUser;
-import top.wecoding.core.model.TokenInfo;
-import top.wecoding.core.model.jwt.JwtPayLoad;
 import top.wecoding.core.security.provider.ClientDetails;
 import top.wecoding.core.security.service.TokenService;
 import top.wecoding.core.security.util.SecurityUtils;
-import top.wecoding.core.util.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package top.wecoding.core.util;
+package top.wecoding.core.jwt.util;
 
 /**
  * Token相关工具类

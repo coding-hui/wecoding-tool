@@ -36,7 +36,7 @@
         <hutool.version>5.7.19</hutool.version>
         <fastjson.version>1.2.79</fastjson.version>
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
-        <jjwt.version>0.9.1</jjwt.version>
+        <jjwt.version>0.11.5</jjwt.version>
 
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <swagger.core.version>1.6.2</swagger.core.version>
@@ -218,7 +218,17 @@
             <!-- JWT -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
 
@@ -254,6 +264,13 @@
             <dependency>
                 <groupId>top.wecoding</groupId>
                 <artifactId>wecoding-starter-security</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
+            <!-- 认证模块 -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-auth</artifactId>
                 <version>${wecoding.version}</version>
             </dependency>
 
@@ -303,6 +320,13 @@
             <dependency>
                 <groupId>top.wecoding</groupId>
                 <artifactId>wecoding-starter-feign</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
+            <!-- Jwt -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-jwt</artifactId>
                 <version>${wecoding.version}</version>
             </dependency>
 

@@ -81,12 +81,6 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
-        <!-- jwt -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-        </dependency>
-
         <!-- MyBatisPlus Annotation -->
         <dependency>
             <groupId>com.baomidou</groupId>
