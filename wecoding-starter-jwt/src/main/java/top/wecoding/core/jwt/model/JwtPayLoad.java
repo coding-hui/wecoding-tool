@@ -18,11 +18,6 @@ import lombok.NoArgsConstructor;
 public class JwtPayLoad {
 
     /**
-     * 令牌类型
-     */
-    private String tokenType;
-
-    /**
      * 客户端id
      */
     private String clientId;
@@ -41,10 +36,5 @@ public class JwtPayLoad {
      * uuid
      */
     private String uuid;
-
-    /**
-     * 令牌过期秒数
-     */
-    private Long expireMillis;
 
 }

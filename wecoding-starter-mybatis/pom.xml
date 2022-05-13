@@ -17,10 +17,10 @@
 
     <dependencies>
 
-        <!-- WeCoding Security -->
+        <!-- Auth -->
         <dependency>
             <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-starter-security</artifactId>
+            <artifactId>wecoding-starter-auth</artifactId>
         </dependency>
 
         <!-- MyBatisPlus -->

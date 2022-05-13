@@ -9,8 +9,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import top.wecoding.core.context.login.LoginContext;
-import top.wecoding.core.security.context.LoginContextImpl;
 import top.wecoding.core.security.interceptor.HeaderInterceptor;
 import top.wecoding.core.security.props.IgnoreWhiteProperties;
 import top.wecoding.core.security.props.SocialProperties;
@@ -52,11 +50,6 @@ public class SecureConfiguration implements WebMvcConfigurer {
     @ConditionalOnMissingBean(ClientDetailsService.class)
     public ClientDetailsService clientDetailsService() {
         return new JdbcClientDetailsService(jdbcTemplate);
-    }
-
-    @Bean
-    public LoginContext loginContext() {
-        return new LoginContextImpl();
     }
 
 }

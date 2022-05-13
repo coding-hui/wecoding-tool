@@ -35,8 +35,11 @@ public enum ClientErrorCodeEnum implements BaseErrorCode {
     ACCOUNT_PWD_ERROR("0214", "账号或密码错误"),
     LOGIN_EXPIRED("0215", "登录过期，请重新登录"),
     VALID_TOKEN_ERROR("0220", "请求令牌错误"),
-    TOKEN_INVALID_ERROR("0221", "刷新令牌已过期，请重新登录"),
-    PARSE_TOKEN_ERROR("0222", "解析令牌错误"),
+    JWT_TOKEN_ERROR("", "无效令牌"),
+    JWT_TOKEN_EXPIRED("0221", "身份令牌已过期，请重新登录"),
+    JWT_SIGNATURE_ERROR("0222", "非法身份令牌，无效签名"),
+    JWT_TOKEN_IS_EMPTY("0223", "身份令牌为空"),
+    JWT_PARSE_TOKEN_ERROR("0224", "解析身份令牌错误"),
     NO_LOGIN_USER("0230", "无登录用户"),
 
     ACCESS_PERMISSION_ERROR("0300", "访问权限异常"),

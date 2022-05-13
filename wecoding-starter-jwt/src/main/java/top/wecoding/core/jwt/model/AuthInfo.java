@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import top.wecoding.core.constant.SecurityConstants;
 
 import java.time.LocalDateTime;
 
@@ -34,28 +35,25 @@ public class AuthInfo {
     @ApiModelProperty(value = "刷新令牌")
     private String refreshToken;
 
+    @ApiModelProperty(value = "用户Id")
+    private Long userId;
+
     @ApiModelProperty(value = "用户名")
-    private String name;
+    private String realName;
 
     @ApiModelProperty(value = "账号名")
     private String account;
-
-    @ApiModelProperty(value = "头像")
-    private Long avatarId;
-
-    @ApiModelProperty(value = "工作描述")
-    private String workDescribe;
-
-    @ApiModelProperty(value = "用户id")
-    private Long userId;
-
-    @ApiModelProperty(value = "过期时间（秒）")
-    private long expire;
 
     @ApiModelProperty(value = "到期时间")
     private LocalDateTime expiration;
 
     @ApiModelProperty(value = "有效期")
     private Long expireMillis;
+
+    @ApiModelProperty(value = "客户端Id")
+    private String clientId;
+
+    @ApiModelProperty(value = "许可证")
+    private String license = SecurityConstants.PROJECT_LICENSE;
 
 }

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.ReflectionException;
+import top.wecoding.core.auth.util.AuthUtil;
 import top.wecoding.core.constant.StrPool;
-import top.wecoding.core.context.login.LoginContextHolder;
 
 import java.util.Date;
 
@@ -54,7 +54,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
 
     private String getLoginUserName() {
         try {
-            return LoginContextHolder.me().getAccount();
+            return AuthUtil.getAccount();
         } catch (Exception e) {
             log.error(">>> 获取登录用户失败，具体信息为：{}", e.getLocalizedMessage());
         }

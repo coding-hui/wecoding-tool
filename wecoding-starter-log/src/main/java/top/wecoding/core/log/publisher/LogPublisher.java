@@ -9,8 +9,9 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.http.HttpHeaders;
+import top.wecoding.core.auth.model.LoginUser;
+import top.wecoding.core.auth.util.AuthUtil;
 import top.wecoding.core.constant.StrPool;
-import top.wecoding.core.context.login.LoginContextHolder;
 import top.wecoding.core.enums.VisLogTypeEnum;
 import top.wecoding.core.exception.BizException;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
@@ -21,7 +22,6 @@ import top.wecoding.core.log.enums.LogTypeEnum;
 import top.wecoding.core.log.event.ExitLogEvent;
 import top.wecoding.core.log.event.LoginLogEvent;
 import top.wecoding.core.log.event.OperationLogEvent;
-import top.wecoding.core.model.LoginUser;
 import top.wecoding.core.util.HttpServletUtils;
 import top.wecoding.core.util.IpAddressUtil;
 
@@ -117,9 +117,8 @@ public class LogPublisher {
         if (ObjectUtil.isNotNull(request)) {
             UserAgent userAgent = UserAgentUtil.parse(request.getHeader(HttpHeaders.USER_AGENT));
             return SysLoginLog.builder()
-                    .account(LoginContextHolder.me().getAccount())
-                    .userId(LoginContextHolder.me().getUserId())
-                    .loginUuid(LoginContextHolder.me().getUserCacheKey())
+                    .account(AuthUtil.getAccount())
+                    .userId(AuthUtil.getUserId())
                     .ipaddr(IpAddressUtil.getIp(request))
                     .loginLocation(IpAddressUtil.getAddress(request))
                     .browser(userAgent.getBrowser().getName())
@@ -143,8 +142,8 @@ public class LogPublisher {
                     .setRequestUri(URLUtil.getPath(request.getRequestURI()))
                     .setIp(IpAddressUtil.getIp(request))
                     .setUserAgent(userAgent.getBrowser() + StrPool.LEFT_DIVIDE + userAgent.getOs())
-                    .setServiceId(LoginContextHolder.me().getClientId())
-                    .setCreateUser(LoginContextHolder.me().getAccount())
+                    .setServiceId(AuthUtil.getClientId())
+                    .setCreateUser(AuthUtil.getAccount())
                     .setLocation(IpAddressUtil.getAddress(request))
                     .setType(LogTypeEnum.NORMAL.getType())
                     .setCreateTime(new Date());

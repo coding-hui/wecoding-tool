@@ -5,7 +5,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import top.wecoding.core.cache.redis.RedisAutoConfigure;
-import top.wecoding.core.cache.redis.service.RedisService;
 
 /**
  * @author liuyuhui
@@ -19,11 +18,6 @@ public class CacheAutoConfigure {
 
     public static final Long SYSTEM_CONFIG_CACHE_TIMEOUT = 2 * 60 * 60 * 1000L;
     public static final Long VALIDATE_CACHE_TIMEOUT = 60 * 1000L;
-
-    @Bean
-    public UserCache userCache(RedisService redisService) {
-        return new UserCache(redisService);
-    }
 
     @Bean
     public SystemConfigCacheOperator systemConfigCache() {

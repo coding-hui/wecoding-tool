@@ -1,24 +1,22 @@
 package top.wecoding.core.jwt.util;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
-import top.wecoding.core.jwt.model.JwtPayLoad;
+import top.wecoding.core.jwt.model.TokenInfo;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -27,42 +25,51 @@ import java.util.Map;
  * @author liuyuhui
  * @qq 1515418211
  */
+@Slf4j
 public class JwtUtils {
+
+    /**
+     * 签名加密
+     */
+    public static String getBase64Security() {
+        return Base64.getEncoder().encodeToString(TokenConstant.SING_KEY.getBytes(StandardCharsets.UTF_8));
+    }
 
     /**
      * 创建 JWT 令牌
      *
-     * @param jwtPayLoad 数据声明
+     * @param claims 数据声明
+     * @param expire 过期时间（秒)
      * @return 令牌
      */
-    public static String createToken(JwtPayLoad jwtPayLoad) {
-        DateTime expirationDate = DateUtil.offsetSecond(new Date(),
-                Convert.toInt(jwtPayLoad.getExpireMillis()));
+    public static TokenInfo createJWT(Map<String, String> claims, long expire) {
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-        Map<String, Object> claims = new HashMap<>();
-        if (StrUtil.isNotBlank(jwtPayLoad.getTokenType())) {
-            claims.put(TokenConstant.TOKEN_TYPE, jwtPayLoad.getTokenType());
-        }
-        if (StrUtil.isNotBlank(jwtPayLoad.getUuid())) {
-            claims.put(SecurityConstants.USER_KEY, jwtPayLoad.getUuid());
-        }
-        if (ObjectUtil.isNotNull(jwtPayLoad.getUserId())) {
-            claims.put(SecurityConstants.DETAILS_USER_ID, jwtPayLoad.getUserId());
-        }
-        if (StrUtil.isNotBlank(jwtPayLoad.getAccount())) {
-            claims.put(SecurityConstants.DETAILS_ACCOUNT, jwtPayLoad.getAccount());
-        }
-        if (StrUtil.isNotBlank(jwtPayLoad.getClientId())) {
-            claims.put(SecurityConstants.DETAILS_CLIENT_ID, jwtPayLoad.getClientId());
-        }
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
 
-        JwtBuilder jwtBuilder = Jwts.builder()
-                .setSubject(jwtPayLoad.getUserId().toString())
-                .setIssuedAt(new Date())
-                .setClaims(claims)
-                .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, TokenConstant.SING_KEY);
-        return jwtBuilder.compact();
+        // 生成签名密钥
+        byte[] apiKeySecretBytes = Base64.getDecoder().decode(getBase64Security());
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+        JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JsonWebToken")
+                .setIssuedAt(now)
+                .signWith(signingKey, signatureAlgorithm);
+
+        // 设置JWT数据声明
+        claims.forEach(builder::claim);
+
+        // 添加Token过期时间
+        long expMillis = nowMillis + expire * 1000;
+        Date exp = new Date(expMillis);
+        builder.setNotBefore(now).setExpiration(exp);
+
+        // 组装Token信息
+        return TokenInfo.builder()
+                .token(builder.compact())
+                .expiresIn(expire)
+                .expiration(DateUtil.toLocalDateTime(exp))
+                .build();
     }
 
     /**
@@ -74,24 +81,18 @@ public class JwtUtils {
     public static Claims parseToken(String token) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(Base64.getDecoder().decode(TokenConstant.SING_KEY))
+                    .setSigningKey(Base64.getDecoder().decode(getBase64Security()))
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
+        } catch (ExpiredJwtException ex) {
+            throw new UnauthorizedException(ClientErrorCodeEnum.JWT_TOKEN_EXPIRED);
+        } catch (SignatureException ex) {
+            throw new UnauthorizedException(ClientErrorCodeEnum.JWT_SIGNATURE_ERROR);
+        } catch (IllegalArgumentException ex) {
+            throw new UnauthorizedException(ClientErrorCodeEnum.JWT_TOKEN_IS_EMPTY);
         } catch (Exception e) {
-            throw new UnauthorizedException(ClientErrorCodeEnum.PARSE_TOKEN_ERROR);
-        }
-    }
-
-    /**
-     * 校验token是否正确
-     */
-    public static boolean checkToken(String token) {
-        try {
-            parseToken(token);
-            return true;
-        } catch (Exception jwtException) {
-            return false;
+            throw new UnauthorizedException(ClientErrorCodeEnum.JWT_PARSE_TOKEN_ERROR);
         }
     }
 
@@ -135,9 +136,9 @@ public class JwtUtils {
      * @param token 令牌
      * @return 用户ID
      */
-    public static String getUserId(String token) {
+    public static Long getUserId(String token) {
         Claims claims = parseToken(token);
-        return getValue(claims, SecurityConstants.DETAILS_USER_ID);
+        return Convert.toLong(getValue(claims, SecurityConstants.DETAILS_USER_ID));
     }
 
     /**
@@ -146,8 +147,8 @@ public class JwtUtils {
      * @param claims 身份信息
      * @return 用户ID
      */
-    public static String getUserId(Claims claims) {
-        return getValue(claims, SecurityConstants.DETAILS_USER_ID);
+    public static Long getUserId(Claims claims) {
+        return Convert.toLong(getValue(claims, SecurityConstants.DETAILS_USER_ID));
     }
 
     /**

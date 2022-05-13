@@ -2,11 +2,11 @@ package top.wecoding.core.security.auth;
 
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
+import top.wecoding.core.auth.model.LoginUser;
+import top.wecoding.core.auth.util.AuthUtil;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
-import top.wecoding.core.model.LoginUser;
 import top.wecoding.core.security.constant.RoleConstant;
-import top.wecoding.core.security.util.SecurityUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,7 +26,7 @@ public class AuthFunction {
      */
     public boolean requiresLogin() {
         try {
-            SecurityUtils.getLoginUser();
+            AuthUtil.getLoginUser();
             return true;
         } catch (Exception e) {
             throw new UnauthorizedException(ClientErrorCodeEnum.NO_LOGIN_USER);
@@ -110,7 +110,7 @@ public class AuthFunction {
      */
     public Set<String> getAllRoleKeys() {
         try {
-            LoginUser loginUser = SecurityUtils.getLoginUser();
+            LoginUser loginUser = AuthUtil.getLoginUser();
             return loginUser.getRoleKeys();
         } catch (Exception e) {
             return new HashSet<>();
@@ -124,7 +124,7 @@ public class AuthFunction {
      */
     public Set<String> getAllPermissions() {
         try {
-            LoginUser loginUser = SecurityUtils.getLoginUser();
+            LoginUser loginUser = AuthUtil.getLoginUser();
             return loginUser.getPermissions();
         } catch (Exception e) {
             return new HashSet<>();

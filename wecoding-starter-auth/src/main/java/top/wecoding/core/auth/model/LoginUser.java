@@ -1,4 +1,4 @@
-package top.wecoding.core.model;
+package top.wecoding.core.auth.model;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.lang.tree.Tree;
