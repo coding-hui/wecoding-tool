@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  top.wecoding.core.web.config.ExceptionConfiguration,\
-  top.wecoding.core.web.config.JacksonConfiguration,\
-  top.wecoding.core.web.config.WebMvcConfig

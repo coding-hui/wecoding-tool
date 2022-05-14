@@ -27,6 +27,11 @@ public interface SecurityConstants {
     String PROJECT_LICENSE = "Power By WeCoding";
 
     /**
+     * 客户端认证请求头
+     */
+    String BASIC_HEADER_KEY = "Authorization";
+
+    /**
      * 客户端认证请求头前缀
      */
     String BASIC_HEADER_PREFIX = "Basic ";

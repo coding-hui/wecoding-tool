@@ -16,6 +16,7 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
+import top.wecoding.core.feign.WeCodingFeignAutoConfiguration;
 
 import java.util.List;
 import java.util.Map;
@@ -109,13 +110,12 @@ public class WeCodingFeignClientsRegistrar implements ImportBeanDefinitionRegist
     }
 
     /**
-     * Return the class used by {@link SpringFactoriesLoader} to load configuration
-     * candidates.
+     * Return the class used by {@link SpringFactoriesLoader} to load configuration candidates.
      *
      * @return the factory class
      */
     private Class<?> getSpringFactoriesLoaderFactoryClass() {
-        return WeCodingFeignClientsRegistrar.class;
+        return WeCodingFeignAutoConfiguration.class;
     }
 
     private void validate(Map<String, Object> attributes) {

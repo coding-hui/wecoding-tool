@@ -253,13 +253,6 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
-            <!--            &lt;!&ndash; 全局配置 Mybatis &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-mybatis</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
             <!-- 安全模块 -->
             <dependency>
                 <groupId>top.wecoding</groupId>
@@ -274,47 +267,12 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
-            <!--            &lt;!&ndash; 接口文档 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-swagger</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; 日志记录 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-log</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; 数据源 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-datasource</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; Seata &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-seata</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; RocketMQ &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-rocketmq</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; RabbitMQ &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-rabbit</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Cloud -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-cloud</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
             <!-- Feign -->
             <dependency>
@@ -330,40 +288,33 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
-            <!--            &lt;!&ndash; Web 模块 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-web</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Web 模块 -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-web</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
-            <!--            &lt;!&ndash; MongoDB &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-mongodb</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Mybatis -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-mybatis</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
-            <!--            &lt;!&ndash; 文件存储 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-storage</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Log -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-log</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
-            <!--            &lt;!&ndash; 微服务模块 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-common-cloud</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
-
-            <!--            &lt;!&ndash; 系统模块接口 &ndash;&gt;-->
-            <!--            <dependency>-->
-            <!--                <groupId>top.wecoding</groupId>-->
-            <!--                <artifactId>wecoding-system-api</artifactId>-->
-            <!--                <version>${wecoding.version}</version>-->
-            <!--            </dependency>-->
+            <!-- Auto -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-auto</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

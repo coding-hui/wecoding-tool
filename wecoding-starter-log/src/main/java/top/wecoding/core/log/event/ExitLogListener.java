@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.log.feign.RemoteLogService;
 
@@ -16,7 +15,6 @@ import java.util.List;
  * @qq 1515418211
  */
 @Slf4j
-@Component
 @AllArgsConstructor
 public class ExitLogListener {
 

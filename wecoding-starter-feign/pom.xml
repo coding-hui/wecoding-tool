@@ -24,6 +24,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Auto -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Spring WebFlux -->
         <dependency>
             <groupId>org.springframework</groupId>

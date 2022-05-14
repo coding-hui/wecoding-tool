@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  top.wecoding.core.feign.WeCodingFeignAutoConfiguration,\
-  top.wecoding.core.feign.sentinel.SentinelAutoConfiguration

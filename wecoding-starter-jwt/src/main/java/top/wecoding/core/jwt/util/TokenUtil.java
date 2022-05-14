@@ -70,7 +70,7 @@ public class TokenUtil {
         TokenInfo tokenInfo = JwtUtils.createJWT(claims, expireMillis);
 
         return AuthInfo.builder()
-                .token(tokenInfo.getToken())
+                .accessToken(tokenInfo.getToken())
                 .expireMillis(tokenInfo.getExpiresIn())
                 .expiration(tokenInfo.getExpiration())
                 .tokenType(TokenConstant.ACCESS_TOKEN)
@@ -107,7 +107,7 @@ public class TokenUtil {
         Claims claims = JwtUtils.parseToken(replaceTokenPrefix(token));
         Date expiration = claims.getExpiration();
         return AuthInfo.builder()
-                .token(token)
+                .accessToken(token)
                 .tokenType(JwtUtils.getValue(claims, TokenConstant.TOKEN_TYPE))
                 .userId(JwtUtils.getUserId(claims))
                 .account(JwtUtils.getUserAccount(claims))

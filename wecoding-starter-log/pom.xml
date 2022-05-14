@@ -17,9 +17,17 @@
 
     <dependencies>
 
+        <!-- Core -->
         <dependency>
             <groupId>top.wecoding</groupId>
             <artifactId>wecoding-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Auto -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-auto</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -33,7 +41,7 @@
         <!-- Feign -->
         <dependency>
             <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-starter-feign</artifactId>
+            <artifactId>wecoding-starter-cloud</artifactId>
         </dependency>
 
         <!-- Mybatis -->

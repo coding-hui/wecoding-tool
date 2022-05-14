@@ -4,10 +4,13 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
+import top.wecoding.core.exception.ArgumentException;
+import top.wecoding.core.exception.Assert;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
 import top.wecoding.core.jwt.model.TokenInfo;
@@ -18,6 +21,8 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
+
+import static top.wecoding.core.constant.SecurityConstants.BASIC_HEADER_PREFIX;
 
 /**
  * Jwt工具类
@@ -33,6 +38,45 @@ public class JwtUtils {
      */
     public static String getBase64Security() {
         return Base64.getEncoder().encodeToString(TokenConstant.SING_KEY.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * 从请求头中获取客户端信息
+     *
+     * @param header 请求头
+     * @return 客户端
+     */
+    @SneakyThrows
+    public static String getClientIdByHeader(String header) {
+        return extractClient(header)[0];
+    }
+
+    /**
+     * 解析请求头中存储的 client 信息
+     *
+     * @param header 请求头信息
+     * @return [0]: clientId, [1]: 密码
+     */
+    public static String[] extractClient(String header) {
+        Assert.notNull(header, "请求头中 Client 信息为空!");
+        Assert.isTrue(header.startsWith(BASIC_HEADER_PREFIX), "客户端信息不正确!");
+
+        byte[] base64Token = header.substring(BASIC_HEADER_PREFIX.length()).getBytes(StandardCharsets.UTF_8);
+        byte[] decoded;
+        try {
+            decoded = Base64.getDecoder().decode(base64Token);
+        } catch (Exception e) {
+            throw new ArgumentException("客户端令牌解码失败!");
+        }
+
+        String token = new String(decoded, StandardCharsets.UTF_8);
+        int delim = token.indexOf(StrPool.COLON);
+        if (delim < 0) {
+            throw new ArgumentException("无效客户端令牌!");
+        }
+
+        // [0]: clientId, [1]: 密码
+        return new String[]{token.substring(0, delim), token.substring(delim + 1)};
     }
 
     /**

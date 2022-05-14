@@ -16,8 +16,13 @@ import java.util.List;
  * @author liuyuhui
  * @qq 1515418211
  */
-@FeignClient(contextId = "remoteLogService", value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = RemoteLogFallbackFactory.class)
+@FeignClient(
+        contextId = "remoteLogService",
+        value = ServiceNameConstants.SYSTEM_SERVICE,
+        fallbackFactory = RemoteLogFallbackFactory.class)
 public interface RemoteLogService {
+
+    String API_PREFIX = "/log";
 
     /**
      * 保存日志
@@ -26,7 +31,7 @@ public interface RemoteLogService {
      * @param from   内部调用标志
      * @return 操作结果
      */
-    @PostMapping("/log")
+    @PostMapping(API_PREFIX)
     Response saveOpLog(@RequestBody SysOpLog sysLog, @RequestHeader(SecurityConstants.FROM_SOURCE) String from);
 
     /**

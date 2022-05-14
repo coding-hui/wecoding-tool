@@ -34,6 +34,6 @@ public interface TokenConstant {
     /**
      * 令牌秘钥
      */
-    String SING_KEY = "WeCoding#!(319";
+    String SING_KEY = "U2FsdGVkX1/7rSqZDNzEAFH9plu0RVzYjSGe3d+/LA2Tq3rvzmC1fA==";
 
 }

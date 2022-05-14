@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 public class AuthInfo {
 
     @ApiModelProperty(value = "令牌")
-    private String token;
+    private String accessToken;
 
     @ApiModelProperty(value = "令牌类型")
     private String tokenType;

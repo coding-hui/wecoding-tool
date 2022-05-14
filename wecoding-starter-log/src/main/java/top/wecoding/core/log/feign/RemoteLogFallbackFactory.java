@@ -1,7 +1,6 @@
 package top.wecoding.core.log.feign;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 import top.wecoding.core.log.entity.SysLoginLog;
 import top.wecoding.core.log.entity.SysOpLog;
@@ -16,31 +15,20 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class RemoteLogFallbackFactory implements FallbackFactory<RemoteLogService> {
+public class RemoteLogFallbackFactory implements RemoteLogService {
 
     @Override
-    public RemoteLogService create(Throwable cause) {
-
-        log.error(" >>> 日志服务调用失败，具体信息为:{}", cause.getMessage());
-
-        return new RemoteLogService() {
-
-            @Override
-            public Response saveOpLog(SysOpLog sysLog, String from) {
-                return Response.buildFailure(cause.getMessage());
-            }
-
-            @Override
-            public Response saveLoginLog(SysLoginLog sysLoginLog, String from) {
-                return Response.buildFailure(cause.getMessage());
-            }
-
-            @Override
-            public Response saveLogoutLog(List<String> userKeys, String from) {
-                return Response.buildFailure(cause.getMessage());
-            }
-
-        };
+    public Response saveOpLog(SysOpLog sysLog, String from) {
+        return null;
     }
 
+    @Override
+    public Response saveLoginLog(SysLoginLog sysLoginLog, String from) {
+        return null;
+    }
+
+    @Override
+    public Response saveLogoutLog(List<String> userKeys, String from) {
+        return null;
+    }
 }
