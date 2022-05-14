@@ -26,6 +26,9 @@ import java.time.LocalDateTime;
 @ApiModel(description = "认证信息")
 public class AuthInfo {
 
+    @ApiModelProperty(value = "会话唯一标识")
+    private String uuid;
+
     @ApiModelProperty(value = "令牌")
     private String accessToken;
 

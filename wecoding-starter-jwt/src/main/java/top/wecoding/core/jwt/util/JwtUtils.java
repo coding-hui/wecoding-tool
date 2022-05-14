@@ -2,18 +2,19 @@ package top.wecoding.core.jwt.util;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.StrPool;
-import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.exception.ArgumentException;
 import top.wecoding.core.exception.Assert;
 import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.exception.user.UnauthorizedException;
 import top.wecoding.core.jwt.model.TokenInfo;
+import top.wecoding.core.jwt.props.JwtProperties;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
@@ -33,11 +34,20 @@ import static top.wecoding.core.constant.SecurityConstants.BASIC_HEADER_PREFIX;
 @Slf4j
 public class JwtUtils {
 
+    private static JwtProperties jwtProperties;
+
+    public static JwtProperties getJwtProperties() {
+        if (jwtProperties == null) {
+            jwtProperties = SpringUtil.getBean(JwtProperties.class);
+        }
+        return jwtProperties;
+    }
+
     /**
      * 签名加密
      */
     public static String getBase64Security() {
-        return Base64.getEncoder().encodeToString(TokenConstant.SING_KEY.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(getJwtProperties().getSignKey().getBytes(StandardCharsets.UTF_8));
     }
 
     /**

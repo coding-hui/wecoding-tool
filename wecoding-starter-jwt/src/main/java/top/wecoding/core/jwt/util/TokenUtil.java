@@ -66,6 +66,7 @@ public class TokenUtil {
         claims.put(SecurityConstants.DETAILS_USER_ID, Convert.toStr(jwtPayLoad.getUserId()));
         claims.put(SecurityConstants.DETAILS_ACCOUNT, jwtPayLoad.getAccount());
         claims.put(SecurityConstants.DETAILS_CLIENT_ID, jwtPayLoad.getClientId());
+        claims.put(SecurityConstants.DETAILS_USERNAME, jwtPayLoad.getRealName());
 
         TokenInfo tokenInfo = JwtUtils.createJWT(claims, expireMillis);
 
@@ -75,8 +76,10 @@ public class TokenUtil {
                 .expiration(tokenInfo.getExpiration())
                 .tokenType(TokenConstant.ACCESS_TOKEN)
                 .refreshToken(createRefreshToken(jwtPayLoad).getToken())
-                .account(jwtPayLoad.getAccount())
+                .uuid(jwtPayLoad.getUuid())
                 .userId(jwtPayLoad.getUserId())
+                .account(jwtPayLoad.getAccount())
+                .realName(jwtPayLoad.getRealName())
                 .clientId(jwtPayLoad.getClientId())
                 .build();
     }
@@ -109,8 +112,10 @@ public class TokenUtil {
         return AuthInfo.builder()
                 .accessToken(token)
                 .tokenType(JwtUtils.getValue(claims, TokenConstant.TOKEN_TYPE))
+                .uuid(JwtUtils.getUserKey(claims))
                 .userId(JwtUtils.getUserId(claims))
                 .account(JwtUtils.getUserAccount(claims))
+                .realName(JwtUtils.getUserRealName(claims))
                 .clientId(JwtUtils.getClientId(claims))
                 .expireMillis(Convert.toLong(expiration, 0L))
                 .build();

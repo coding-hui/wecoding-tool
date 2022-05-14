@@ -33,6 +33,11 @@ public class JwtPayLoad {
     private String account;
 
     /**
+     * 用户姓名
+     */
+    private String realName;
+
+    /**
      * uuid
      */
     private String uuid;
