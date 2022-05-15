@@ -29,7 +29,7 @@ public class AuthUtil {
      * @return clientId
      */
     public String getClientId() {
-        return getLoginUser().getClientId();
+        return getAuthInfo().getClientId();
     }
 
     /**
@@ -38,7 +38,7 @@ public class AuthUtil {
      * @return 登录用户账户
      **/
     public String getAccount() {
-        return getLoginUser().getAccount();
+        return getAuthInfo().getAccount();
     }
 
     /**
@@ -47,7 +47,12 @@ public class AuthUtil {
      * @return UserID
      */
     public Long getUserId() {
-        return getLoginUser().getUserId();
+        return getAuthInfo().getUserId();
+    }
+
+    public AuthInfo getAuthInfo() {
+        String token = getToken(HttpServletUtils.getRequest());
+        return TokenUtil.getAuthInfo(token);
     }
 
     /**

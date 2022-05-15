@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>wecoding-tool</artifactId>
+        <groupId>top.wecoding</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>wecoding-starter-boot</artifactId>
+
+    <description>Boot启动模块</description>
+
+    <dependencies>
+
+        <!-- 核心模块 -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-core</artifactId>
+        </dependency>
+
+        <!-- Auto -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Web -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-web</artifactId>
+        </dependency>
+
+        <!-- Mybatis -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-mybatis</artifactId>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-security</artifactId>
+        </dependency>
+
+        <!-- Log -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-log</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -25,6 +25,7 @@
         <module>wecoding-starter-swagger</module>
         <module>wecoding-starter-mongo</module>
         <module>wecoding-auto</module>
+        <module>wecoding-starter-boot</module>
     </modules>
 
     <name>wecoding-tool</name>

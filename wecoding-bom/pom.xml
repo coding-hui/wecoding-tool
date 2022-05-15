@@ -316,6 +316,13 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
+            <!-- Boot -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-boot</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
