@@ -11,9 +11,29 @@
 
     <artifactId>wecoding-starter-mongo</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <description>
+        MongoDB
+    </description>
 
+    <dependencies>
+
+        <!-- Core -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-core</artifactId>
+        </dependency>
+
+        <!-- Auto -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>
