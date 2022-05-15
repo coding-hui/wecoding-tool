@@ -28,6 +28,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- DB -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-database</artifactId>
+        </dependency>
+
         <!-- Web -->
         <dependency>
             <groupId>top.wecoding</groupId>

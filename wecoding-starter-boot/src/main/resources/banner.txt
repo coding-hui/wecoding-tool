@@ -1,0 +1,8 @@
+${AnsiColor.BRIGHT_CYAN} _       __     ______          ___            ${AnsiColor.BLUE}    ____              __
+${AnsiColor.BRIGHT_CYAN}| |     / /__  / ____/___  ____/ (_)___  ____ _${AnsiColor.BLUE}   / __ )____  ____  / /_
+${AnsiColor.BRIGHT_CYAN}| | /| / / _ \/ /   / __ \/ __  / / __ \/ __ `/${AnsiColor.BLUE}  / __  / __ \/ __ \/ __/
+${AnsiColor.BRIGHT_CYAN}| |/ |/ /  __/ /___/ /_/ / /_/ / / / / / /_/ / ${AnsiColor.BLUE} / /_/ / /_/ / /_/ / /_
+${AnsiColor.BRIGHT_CYAN}|__/|__/\___/\____/\____/\__,_/_/_/ /_/\__, /  ${AnsiColor.BLUE}/_____/\____/\____/\__/
+${AnsiColor.BRIGHT_CYAN}                                      /____/   ${AnsiColor.BLUE}
+
+${AnsiColor.BLUE}:: ${spring.application.name}:${server.port} :: Spring Boot :: ${spring-boot.formatted-version} ${AnsiColor.BRIGHT_WHITE}

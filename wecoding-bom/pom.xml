@@ -323,6 +323,13 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
+            <!-- DB -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-database</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
