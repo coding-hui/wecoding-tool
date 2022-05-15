@@ -337,6 +337,20 @@
                 <version>${wecoding.version}</version>
             </dependency>
 
+            <!-- OSS -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-oss</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>top.wecoding</groupId>
+                <artifactId>wecoding-starter-test</artifactId>
+                <version>${wecoding.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

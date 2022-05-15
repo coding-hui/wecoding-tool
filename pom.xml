@@ -26,6 +26,8 @@
         <module>wecoding-starter-mongo</module>
         <module>wecoding-auto</module>
         <module>wecoding-starter-boot</module>
+        <module>wecoding-starter-oss</module>
+        <module>wecoding-starter-test</module>
     </modules>
 
     <name>wecoding-tool</name>
@@ -77,6 +79,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!--测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wecoding-starter-mongo</artifactId>
+    <artifactId>wecoding-starter-test</artifactId>
 
     <description>
-        MongoDB
+        单位测试封装
     </description>
 
     <dependencies>
@@ -21,18 +21,19 @@
         <dependency>
             <groupId>top.wecoding</groupId>
             <artifactId>wecoding-core</artifactId>
-        </dependency>
-
-        <!-- Auto -->
-        <dependency>
-            <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-auto</artifactId>
             <scope>provided</scope>
         </dependency>
 
+        <!-- 权限 -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-security</artifactId>
+        </dependency>
+
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
     </dependencies>

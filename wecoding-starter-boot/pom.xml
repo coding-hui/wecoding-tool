@@ -58,6 +58,12 @@
             <artifactId>wecoding-starter-log</artifactId>
         </dependency>
 
+        <!-- OSS -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-oss</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
