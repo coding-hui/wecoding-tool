@@ -19,6 +19,12 @@
             <artifactId>wecoding-starter-jwt</artifactId>
         </dependency>
 
+        <!-- Redis -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-starter-redis</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

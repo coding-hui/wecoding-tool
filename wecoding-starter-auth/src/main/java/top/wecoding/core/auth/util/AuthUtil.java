@@ -4,11 +4,10 @@ import cn.hutool.core.util.StrUtil;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.auth.model.LoginUser;
+import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.TokenConstant;
+import top.wecoding.core.context.security.SecurityContextHolder;
 import top.wecoding.core.enums.UserTypeEnum;
-import top.wecoding.core.jwt.model.AuthInfo;
-import top.wecoding.core.jwt.util.TokenUtil;
-import top.wecoding.core.util.HttpServletUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +28,7 @@ public class AuthUtil {
      * @return clientId
      */
     public String getClientId() {
-        return getAuthInfo().getClientId();
+        return SecurityContextHolder.getClientId();
     }
 
     /**
@@ -38,7 +37,7 @@ public class AuthUtil {
      * @return 登录用户账户
      **/
     public String getAccount() {
-        return getAuthInfo().getAccount();
+        return SecurityContextHolder.getAccount();
     }
 
     /**
@@ -47,12 +46,7 @@ public class AuthUtil {
      * @return UserID
      */
     public Long getUserId() {
-        return getAuthInfo().getUserId();
-    }
-
-    public AuthInfo getAuthInfo() {
-        String token = getToken(HttpServletUtils.getRequest());
-        return TokenUtil.getAuthInfo(token);
+        return SecurityContextHolder.getUserId();
     }
 
     /**
@@ -61,37 +55,7 @@ public class AuthUtil {
      * @return LoginUser
      */
     public LoginUser getLoginUser() {
-        HttpServletRequest request = HttpServletUtils.getRequest();
-        String token = getToken(request);
-        AuthInfo authInfo = TokenUtil.getAuthInfo(token);
-        return new LoginUser();
-    }
-
-    /**
-     * 获取登录用户，获取不到抛出异常
-     *
-     * @return LoginUser
-     */
-    public LoginUser getLoginUser(HttpServletRequest request) {
-        String token = getToken(request);
-        AuthInfo authInfo = TokenUtil.getAuthInfo(token);
-
-
-        return new LoginUser();
-    }
-
-    /**
-     * 获取登录用户，获取不到不抛出异常
-     *
-     * @return LoginUser
-     */
-    public LoginUser getLoginUserWithoutException() {
-        try {
-            return getLoginUser();
-        } catch (Exception e) {
-            log.warn(" >>> 获取登录用户失败. Thread:{}", Thread.currentThread());
-            return null;
-        }
+        return SecurityContextHolder.get(SecurityConstants.LOGIN_USER, LoginUser.class);
     }
 
     /**

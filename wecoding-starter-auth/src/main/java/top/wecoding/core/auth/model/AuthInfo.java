@@ -1,4 +1,4 @@
-package top.wecoding.core.jwt.model;
+package top.wecoding.core.auth.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

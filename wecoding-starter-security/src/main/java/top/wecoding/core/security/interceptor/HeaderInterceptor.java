@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import top.wecoding.core.auth.util.AuthUtil;
+import top.wecoding.core.security.util.TokenUtil;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.context.security.SecurityContextHolder;
 import top.wecoding.core.util.HttpServletUtils;
@@ -38,7 +39,7 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
 
         String token = AuthUtil.getToken(request);
         if (StrUtil.isNotBlank(token)) {
-            Optional.ofNullable(AuthUtil.getLoginUser(request)).ifPresent(loginUser ->
+            Optional.ofNullable(TokenUtil.getLoginUser(token)).ifPresent(loginUser ->
                     SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser));
         }
         return true;
