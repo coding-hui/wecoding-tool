@@ -1,7 +1,5 @@
-package top.wecoding.core.auth.cache;
+package top.wecoding.core.security.cache;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.stereotype.Component;
 import top.wecoding.core.auth.model.LoginUser;
 import top.wecoding.core.cache.base.BaseRedisCacheOperator;
 import top.wecoding.core.cache.redis.service.RedisService;
@@ -13,8 +11,6 @@ import top.wecoding.core.cache.redis.service.RedisService;
  * @date 2022/5/18
  * @qq 1515418211
  */
-@Component
-@ConditionalOnMissingBean
 public class LoginUserCache extends BaseRedisCacheOperator<LoginUser> {
 
     public static final String LOGIN_USER_CACHE = "login_user:";

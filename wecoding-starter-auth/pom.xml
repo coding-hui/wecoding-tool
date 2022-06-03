@@ -13,16 +13,17 @@
 
     <dependencies>
 
+        <!-- Auto -->
+        <dependency>
+            <groupId>top.wecoding</groupId>
+            <artifactId>wecoding-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Jwt -->
         <dependency>
             <groupId>top.wecoding</groupId>
             <artifactId>wecoding-starter-jwt</artifactId>
-        </dependency>
-
-        <!-- Redis -->
-        <dependency>
-            <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-starter-redis</artifactId>
         </dependency>
 
     </dependencies>

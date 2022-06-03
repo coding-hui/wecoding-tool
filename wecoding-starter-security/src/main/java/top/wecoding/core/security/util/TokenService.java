@@ -3,13 +3,13 @@ package top.wecoding.core.security.util;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import io.jsonwebtoken.Claims;
-import lombok.experimental.UtilityClass;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import top.wecoding.core.auth.cache.LoginUserCache;
+import org.springframework.stereotype.Component;
 import top.wecoding.core.auth.model.AuthInfo;
 import top.wecoding.core.auth.model.LoginUser;
+import top.wecoding.core.auth.util.AuthUtil;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
@@ -17,6 +17,7 @@ import top.wecoding.core.jwt.model.JwtPayLoad;
 import top.wecoding.core.jwt.model.TokenInfo;
 import top.wecoding.core.jwt.props.JwtProperties;
 import top.wecoding.core.jwt.util.JwtUtils;
+import top.wecoding.core.security.cache.LoginUserCache;
 import top.wecoding.core.util.HttpServletUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,17 +32,13 @@ import java.util.Map;
  * @qq 1515418211
  */
 @Slf4j
-@UtilityClass
-public class TokenUtil {
+@Component
+@AllArgsConstructor
+public class TokenService {
 
-    private static final JwtProperties jwtProperties;
+    private final JwtProperties jwtProperties;
 
-    private static final LoginUserCache loginUserCache;
-
-    static {
-        jwtProperties = SpringUtil.getBean(JwtProperties.class);
-        loginUserCache = SpringUtil.getBean(LoginUserCache.class);
-    }
+    private final LoginUserCache loginUserCache;
 
     /**
      * 创建认证 Token
@@ -128,6 +125,18 @@ public class TokenUtil {
     }
 
     /**
+     * 删除登录用户信息
+     *
+     * @param token 令牌
+     */
+    public void removeLoginUser(String token) {
+        if (StrUtil.isBlank(token)) {
+            return;
+        }
+        loginUserCache.remove(JwtUtils.getUserKey(token));
+    }
+
+    /**
      * 获取用户身份信息
      *
      * @return 用户信息
@@ -142,9 +151,7 @@ public class TokenUtil {
      * @return 用户信息
      */
     public LoginUser getLoginUser(HttpServletRequest request) {
-        // 获取请求携带的令牌
-        String token = getToken(request);
-        return getLoginUser(token);
+        return getLoginUser(AuthUtil.getToken(request));
     }
 
     /**
@@ -155,7 +162,7 @@ public class TokenUtil {
     public LoginUser getLoginUser(String token) {
         try {
             if (StrUtil.isNotEmpty(token)) {
-                return loginUserCache.get(JwtUtils.getUserKey(token));
+                return loginUserCache.get(JwtUtils.getUserKey(replaceTokenPrefix(token)));
             }
         } catch (Exception e) {
             log.warn(" >>> 获取登录用户失败. Thread:{}", Thread.currentThread());
@@ -182,20 +189,6 @@ public class TokenUtil {
                 .clientId(JwtUtils.getClientId(claims))
                 .expireMillis(Convert.toLong(expiration, 0L))
                 .build();
-    }
-
-    /**
-     * 获取 Token
-     *
-     * @param request request
-     * @return Token
-     */
-    public String getToken(HttpServletRequest request) {
-        String auth = request.getHeader(TokenConstant.AUTHENTICATION);
-        if (StrUtil.isNotBlank(auth)) {
-            return auth;
-        }
-        return request.getParameter(TokenConstant.AUTHENTICATION);
     }
 
     /**

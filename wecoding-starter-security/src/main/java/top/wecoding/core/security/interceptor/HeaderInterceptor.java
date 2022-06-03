@@ -1,13 +1,14 @@
 package top.wecoding.core.security.interceptor;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import top.wecoding.core.auth.util.AuthUtil;
-import top.wecoding.core.security.util.TokenUtil;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.context.security.SecurityContextHolder;
+import top.wecoding.core.security.util.TokenService;
 import top.wecoding.core.util.HttpServletUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,10 @@ import static top.wecoding.core.constant.SecurityConstants.*;
  * @qq 1515418211
  */
 @Slf4j
+@AllArgsConstructor
 public class HeaderInterceptor implements AsyncHandlerInterceptor {
+
+    private final TokenService tokenService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -39,7 +43,7 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
 
         String token = AuthUtil.getToken(request);
         if (StrUtil.isNotBlank(token)) {
-            Optional.ofNullable(TokenUtil.getLoginUser(token)).ifPresent(loginUser ->
+            Optional.ofNullable(tokenService.getLoginUser(token)).ifPresent(loginUser ->
                     SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser));
         }
         return true;

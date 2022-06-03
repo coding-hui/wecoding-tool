@@ -11,6 +11,8 @@
 
     <artifactId>wecoding-starter-jwt</artifactId>
     <name>${project.artifactId}</name>
+    <version>${wecoding.version}</version>
+    <packaging>jar</packaging>
 
     <description>
         Jwt Token 模块
