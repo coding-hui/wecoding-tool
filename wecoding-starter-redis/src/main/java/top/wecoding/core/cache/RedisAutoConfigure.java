@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.cache.redis;
+package top.wecoding.core.cache;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,8 +36,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import top.wecoding.core.cache.redis.factory.CreateRedisTemplateFactory;
-import top.wecoding.core.cache.redis.service.RedisService;
+import top.wecoding.core.cache.factory.CreateRedisTemplateFactory;
+import top.wecoding.core.cache.service.RedisService;
 import top.wecoding.core.constant.StrPool;
 
 import java.time.Duration;
@@ -45,18 +49,23 @@ import java.time.Duration;
  * @qq 1515418211
  */
 @Slf4j
+@EnableCaching
+@AllArgsConstructor
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(RedisConnectionFactory.class)
 @AutoConfigureBefore(RedisAutoConfiguration.class)
+@EnableConfigurationProperties(CacheProperties.class)
 public class RedisAutoConfigure extends CachingConfigurerSupport {
 
-    @Bean
+    private final CacheProperties cacheProperties;
+
+    @Bean("redisService")
     @ConditionalOnMissingBean
     public RedisService redisService(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
         return new RedisService(redisTemplate, stringRedisTemplate);
     }
 
-    @Bean
+    @Bean("redisValueSerializer")
     public RedisSerializer<Object> redisValueSerializer() {
         return CreateRedisTemplateFactory.redisValueSerializer();
     }
@@ -64,6 +73,11 @@ public class RedisAutoConfigure extends CachingConfigurerSupport {
     @Bean("redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         return CreateRedisTemplateFactory.createObject(connectionFactory);
+    }
+
+    @Bean("stringRedisTemplate")
+    public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory connectionFactory) {
+        return CreateRedisTemplateFactory.createString(connectionFactory);
     }
 
     @Bean
@@ -79,10 +93,27 @@ public class RedisAutoConfigure extends CachingConfigurerSupport {
     }
 
     private RedisCacheConfiguration createRedisCacheConfiguration(RedisSerializer<Object> redisValueSerializer) {
-        return RedisCacheConfiguration.defaultCacheConfig()
+        CacheProperties.Redis redis = cacheProperties.getRedis();
+        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofDays(1))
-                .computePrefixWith(prefix -> prefix + StrPool.COLON)
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisValueSerializer));
+
+        if (redis.getTimeToLive() != null) {
+            configuration.entryTtl(redis.getTimeToLive());
+        }
+        if (!redis.isCacheNullValues()) {
+            configuration = configuration.disableCachingNullValues();
+        }
+        if (!redis.isUseKeyPrefix()) {
+            configuration = configuration.disableKeyPrefix();
+        }
+        if (redis.getKeyPrefix() != null) {
+            configuration = configuration.computePrefixWith(cacheName -> redis.getKeyPrefix().concat(StrPool.COLON).concat(cacheName).concat(StrPool.COLON));
+        } else {
+            configuration = configuration.computePrefixWith(cacheName -> cacheName.concat(StrPool.COLON));
+        }
+
+        return configuration;
     }
 
 }

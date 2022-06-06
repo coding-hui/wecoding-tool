@@ -18,7 +18,7 @@ package top.wecoding.core.cache.base;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import top.wecoding.core.cache.redis.service.RedisService;
+import top.wecoding.core.cache.service.RedisService;
 import top.wecoding.core.constant.StrPool;
 
 import javax.annotation.Resource;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.cache.redis.factory;
+package top.wecoding.core.cache.factory;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -25,7 +25,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import top.wecoding.core.cache.redis.serializer.FastJson2JsonRedisSerializer;
+import top.wecoding.core.cache.serializer.FastJson2JsonRedisSerializer;
 
 /**
  * @author liuyuhui
@@ -63,10 +63,10 @@ public class CreateRedisTemplateFactory {
     public static RedisTemplate<String, String> createString(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, String> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(new StringRedisSerializer());
+        template.setKeySerializer(RedisSerializer.string());
+        template.setValueSerializer(RedisSerializer.string());
+        template.setHashKeySerializer(RedisSerializer.string());
+        template.setHashValueSerializer(RedisSerializer.string());
         template.afterPropertiesSet();
         return template;
     }
