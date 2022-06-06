@@ -37,7 +37,7 @@ public class RegistryConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(SecurityRegistry.class)
-    public SecurityRegistry secureRegistry() {
+    public SecurityRegistry securityRegistry() {
         return new SecurityRegistry();
     }
 
