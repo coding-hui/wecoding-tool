@@ -13,13 +13,6 @@
 
     <dependencies>
 
-        <!-- Auto -->
-        <dependency>
-            <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-auto</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Jwt -->
         <dependency>
             <groupId>top.wecoding</groupId>

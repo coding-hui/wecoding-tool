@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   top.wecoding.core.security.config.SecureConfiguration,\
   top.wecoding.core.security.aspect.InnerAuthAspect,\
+  top.wecoding.core.security.service.TokenService,\
   top.wecoding.core.security.aspect.AuthAspect

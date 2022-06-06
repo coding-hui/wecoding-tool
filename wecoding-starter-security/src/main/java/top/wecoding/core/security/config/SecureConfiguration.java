@@ -24,7 +24,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import top.wecoding.core.cache.redis.service.RedisService;
 import top.wecoding.core.jwt.props.JwtProperties;
 import top.wecoding.core.security.cache.LoginUserCache;
 import top.wecoding.core.security.interceptor.HeaderInterceptor;
@@ -32,7 +31,7 @@ import top.wecoding.core.security.props.IgnoreWhiteProperties;
 import top.wecoding.core.security.props.SocialProperties;
 import top.wecoding.core.security.provider.ClientDetailsService;
 import top.wecoding.core.security.provider.client.JdbcClientDetailsService;
-import top.wecoding.core.security.util.TokenService;
+import top.wecoding.core.security.service.TokenService;
 
 /**
  * 安全配置类
@@ -55,7 +54,6 @@ public class SecureConfiguration implements WebMvcConfigurer {
     private final JdbcTemplate jdbcTemplate;
     private final IgnoreWhiteProperties ignoreWhiteProperties;
     private final JwtProperties jwtProperties;
-    private final RedisService redisService;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -68,7 +66,7 @@ public class SecureConfiguration implements WebMvcConfigurer {
      * 自定义请求头拦截器
      */
     public HeaderInterceptor getHeaderInterceptor() {
-        return new HeaderInterceptor(tokenUtil());
+        return new HeaderInterceptor(tokenService());
     }
 
     @Bean
@@ -78,13 +76,14 @@ public class SecureConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public TokenService tokenUtil() {
+    public TokenService tokenService() {
         return new TokenService(jwtProperties, loginUserCache());
     }
 
     @Bean
+    @ConditionalOnMissingBean(LoginUserCache.class)
     public LoginUserCache loginUserCache() {
-        return new LoginUserCache(redisService);
+        return new LoginUserCache();
     }
 
 }

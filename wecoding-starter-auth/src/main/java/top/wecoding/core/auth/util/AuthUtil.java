@@ -20,6 +20,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.auth.model.LoginUser;
 import top.wecoding.core.constant.SecurityConstants;
+import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.context.security.SecurityContextHolder;
 import top.wecoding.core.enums.UserTypeEnum;
@@ -100,11 +101,22 @@ public class AuthUtil {
      * @return Token
      */
     public String getToken(HttpServletRequest request) {
-        String auth = request.getHeader(TokenConstant.AUTHENTICATION);
-        if (StrUtil.isNotBlank(auth)) {
-            return auth;
+        String token = request.getHeader(TokenConstant.AUTHENTICATION);
+        if (StrUtil.isBlank(token)) {
+            token = request.getParameter(TokenConstant.AUTHENTICATION);
         }
-        return request.getParameter(TokenConstant.AUTHENTICATION);
+        return replaceTokenPrefix(token);
+    }
+
+    /**
+     * 去掉 Token 前缀
+     */
+    public String replaceTokenPrefix(String token) {
+        // 如果前端设置了令牌前缀，则裁剪掉前缀
+        if (StrUtil.isNotEmpty(token) && token.startsWith(TokenConstant.PREFIX)) {
+            token = token.replaceFirst(TokenConstant.PREFIX, StrPool.EMPTY);
+        }
+        return token;
     }
 
 }

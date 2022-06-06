@@ -41,7 +41,6 @@
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <swagger.core.version>1.6.2</swagger.core.version>
         <git.commit.plugin>2.2.5</git.commit.plugin>
-
     </properties>
 
     <dependencyManagement>
@@ -306,13 +305,6 @@
             <dependency>
                 <groupId>top.wecoding</groupId>
                 <artifactId>wecoding-starter-log</artifactId>
-                <version>${wecoding.version}</version>
-            </dependency>
-
-            <!-- Auto -->
-            <dependency>
-                <groupId>top.wecoding</groupId>
-                <artifactId>wecoding-auto</artifactId>
                 <version>${wecoding.version}</version>
             </dependency>
 

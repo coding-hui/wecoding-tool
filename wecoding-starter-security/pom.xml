@@ -16,13 +16,6 @@
     </description>
 
     <dependencies>
-        
-        <!-- Auto -->
-        <dependency>
-            <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-auto</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- Redis 缓存服务 -->
         <dependency>

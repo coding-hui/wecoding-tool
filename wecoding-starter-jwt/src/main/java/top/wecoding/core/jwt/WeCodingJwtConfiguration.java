@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.security.cache;
+package top.wecoding.core.jwt;
 
-import top.wecoding.core.auth.model.LoginUser;
-import top.wecoding.core.cache.base.BaseRedisCacheOperator;
+import lombok.AllArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import top.wecoding.core.jwt.props.JwtProperties;
 
 /**
- * 登录用户信息缓存
- *
  * @author liuyuhui
- * @date 2022/5/18
+ * @date 2022/5/13
  * @qq 1515418211
  */
-public class LoginUserCache extends BaseRedisCacheOperator<LoginUser> {
-
-    public static final String LOGIN_USER_CACHE = "login_user:";
-
-    @Override
-    public String getKeyPrefix() {
-        return LOGIN_USER_CACHE;
-    }
-
+@AllArgsConstructor
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(value = {JwtProperties.class})
+public class WeCodingJwtConfiguration {
 }

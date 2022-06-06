@@ -22,13 +22,6 @@
             <artifactId>wecoding-core</artifactId>
         </dependency>
 
-        <!-- Auto -->
-        <dependency>
-            <groupId>top.wecoding</groupId>
-            <artifactId>wecoding-auto</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- SpringJdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

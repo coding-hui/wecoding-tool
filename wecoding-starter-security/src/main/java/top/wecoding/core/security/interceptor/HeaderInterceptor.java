@@ -23,7 +23,7 @@ import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import top.wecoding.core.auth.util.AuthUtil;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.context.security.SecurityContextHolder;
-import top.wecoding.core.security.util.TokenService;
+import top.wecoding.core.security.service.TokenService;
 import top.wecoding.core.util.HttpServletUtils;
 
 import javax.servlet.http.HttpServletRequest;

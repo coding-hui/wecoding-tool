@@ -16,7 +16,6 @@
         <module>wecoding-starter-web</module>
         <module>wecoding-starter-security</module>
         <module>wecoding-starter-redis</module>
-        <module>wecoding-starter-feign</module>
         <module>wecoding-starter-mybatis</module>
         <module>wecoding-starter-cloud</module>
         <module>wecoding-starter-log</module>
@@ -24,7 +23,6 @@
         <module>wecoding-starter-auth</module>
         <module>wecoding-starter-swagger</module>
         <module>wecoding-starter-mongo</module>
-        <module>wecoding-auto</module>
         <module>wecoding-starter-boot</module>
         <module>wecoding-starter-oss</module>
         <module>wecoding-starter-test</module>
@@ -72,6 +70,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- 配置文件处理器 -->

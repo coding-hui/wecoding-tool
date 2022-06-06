@@ -18,9 +18,10 @@ package top.wecoding.core.cache.base;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
+import top.wecoding.core.cache.redis.service.RedisService;
 import top.wecoding.core.constant.StrPool;
 
-import top.wecoding.core.cache.redis.service.RedisService;
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,11 +33,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public abstract class BaseRedisCacheOperator<V> implements CacheOperator<String, V> {
 
-    private final RedisService redisService;
-
-    public BaseRedisCacheOperator(RedisService redisService) {
-        this.redisService = redisService;
-    }
+    @Resource
+    private RedisService redisService;
 
     @Override
     public void put(String key, V object) {

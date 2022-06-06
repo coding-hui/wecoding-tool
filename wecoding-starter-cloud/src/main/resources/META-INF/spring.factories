@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  top.wecoding.core.cloud.config.CloudGlobalConfiguration,\
+  top.wecoding.core.cloud.config.SentinelAutoConfiguration,\
+  top.wecoding.core.cloud.config.OpenFeignAutoConfiguration,\
+  top.wecoding.core.cloud.config.SentinelFilterConfiguration

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  top.wecoding.core.log.LogAutoConfiguration,\
+  top.wecoding.core.log.feign.RemoteLogFallbackFactory

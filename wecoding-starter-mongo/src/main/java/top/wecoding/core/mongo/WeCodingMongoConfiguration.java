@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.security.cache;
+package top.wecoding.core.mongo;
 
-import top.wecoding.core.auth.model.LoginUser;
-import top.wecoding.core.cache.base.BaseRedisCacheOperator;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * 登录用户信息缓存
+ * Mongo 配置
  *
  * @author liuyuhui
- * @date 2022/5/18
+ * @date 2022/02/14
  * @qq 1515418211
  */
-public class LoginUserCache extends BaseRedisCacheOperator<LoginUser> {
-
-    public static final String LOGIN_USER_CACHE = "login_user:";
-
-    @Override
-    public String getKeyPrefix() {
-        return LOGIN_USER_CACHE;
-    }
-
+@Configuration(proxyBeanMethods = false)
+public class WeCodingMongoConfiguration {
 }
