@@ -45,7 +45,7 @@ import top.wecoding.core.security.service.TokenService;
 @AllArgsConstructor
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({SecurityProperties.class})
-public class SecureConfiguration implements WebMvcConfigurer {
+public class SecurityConfiguration implements WebMvcConfigurer {
 
     private final JdbcTemplate jdbcTemplate;
     private final TokenService tokenService;

@@ -36,7 +36,7 @@ import top.wecoding.core.security.service.TokenService;
 @Order
 @AllArgsConstructor
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore(SecureConfiguration.class)
+@AutoConfigureBefore(SecurityConfiguration.class)
 @EnableConfigurationProperties({JwtProperties.class})
 public class TokenConfiguration {
 
