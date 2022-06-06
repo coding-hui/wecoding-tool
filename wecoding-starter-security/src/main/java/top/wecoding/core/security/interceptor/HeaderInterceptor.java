@@ -58,8 +58,13 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
 
         String token = AuthUtil.getToken(request);
         if (StrUtil.isNotBlank(token)) {
-            Optional.ofNullable(tokenService.getLoginUser(token)).ifPresent(loginUser ->
-                    SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser));
+            Optional.ofNullable(tokenService.getLoginUser(token)).ifPresent(loginUser -> {
+                SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser);
+                SecurityContextHolder.setUserId(loginUser.getUserId());
+                SecurityContextHolder.setUserKey(loginUser.getUuid());
+                SecurityContextHolder.setAccount(loginUser.getAccount());
+                SecurityContextHolder.setClientId(loginUser.getClientId());
+            });
         }
         return true;
     }

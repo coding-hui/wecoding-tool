@@ -22,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 放行白名单配置
+ * Security 配置
  *
  * @author liuyuhui
  * @qq 1515418211
  */
 @Data
 @ConfigurationProperties("wecoding.security")
-public class IgnoreWhiteProperties {
+public class SecurityProperties {
 
     private List<String> whites = new ArrayList<>();
 

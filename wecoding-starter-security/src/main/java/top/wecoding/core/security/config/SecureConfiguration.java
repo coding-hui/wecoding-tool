@@ -22,15 +22,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import top.wecoding.core.jwt.props.JwtProperties;
-import top.wecoding.core.security.cache.LoginUserCache;
+import top.wecoding.core.security.aspect.AuthAspect;
+import top.wecoding.core.security.aspect.InnerAuthAspect;
 import top.wecoding.core.security.interceptor.HeaderInterceptor;
-import top.wecoding.core.security.props.IgnoreWhiteProperties;
-import top.wecoding.core.security.props.SocialProperties;
+import top.wecoding.core.security.props.SecurityProperties;
 import top.wecoding.core.security.provider.ClientDetailsService;
 import top.wecoding.core.security.provider.client.JdbcClientDetailsService;
+import top.wecoding.core.security.registry.SecurityRegistry;
 import top.wecoding.core.security.service.TokenService;
 
 /**
@@ -41,32 +42,24 @@ import top.wecoding.core.security.service.TokenService;
  * @qq 1515418211
  */
 @Order
-@Configuration
 @AllArgsConstructor
-@EnableConfigurationProperties({
-        IgnoreWhiteProperties.class,
-        SocialProperties.class,
-        JwtProperties.class
-})
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({SecurityProperties.class})
 public class SecureConfiguration implements WebMvcConfigurer {
 
-    public static final String[] defaultExcludePatterns = {"/token", "/*/v2/api-docs", "/profile/*"};
     private final JdbcTemplate jdbcTemplate;
-    private final IgnoreWhiteProperties ignoreWhiteProperties;
-    private final JwtProperties jwtProperties;
+    private final TokenService tokenService;
+    private final SecurityRegistry securityRegistry;
+    private final SecurityProperties securityProperties;
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getHeaderInterceptor())
-                .excludePathPatterns(ignoreWhiteProperties.getWhites())
-                .excludePathPatterns(defaultExcludePatterns);
-    }
-
-    /**
-     * 自定义请求头拦截器
-     */
-    public HeaderInterceptor getHeaderInterceptor() {
-        return new HeaderInterceptor(tokenService());
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
+        if (securityRegistry.isEnabled()) {
+            registry.addInterceptor(getHeaderInterceptor())
+                    .excludePathPatterns(securityRegistry.getExcludePatterns())
+                    .excludePathPatterns(securityRegistry.getDefaultExcludePatterns())
+                    .excludePathPatterns(securityProperties.getWhites());
+        }
     }
 
     @Bean
@@ -76,14 +69,20 @@ public class SecureConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public TokenService tokenService() {
-        return new TokenService(jwtProperties, loginUserCache());
+    public InnerAuthAspect innerAuthAspect() {
+        return new InnerAuthAspect();
     }
 
     @Bean
-    @ConditionalOnMissingBean(LoginUserCache.class)
-    public LoginUserCache loginUserCache() {
-        return new LoginUserCache();
+    public AuthAspect authAspect() {
+        return new AuthAspect();
+    }
+
+    /**
+     * 自定义请求头拦截器
+     */
+    public HeaderInterceptor getHeaderInterceptor() {
+        return new HeaderInterceptor(tokenService);
     }
 
 }
