@@ -110,6 +110,7 @@ public class TokenService {
                 .account(jwtPayLoad.getAccount())
                 .realName(jwtPayLoad.getRealName())
                 .clientId(jwtPayLoad.getClientId())
+                .license(SecurityConstants.PROJECT_LICENSE)
                 .build();
     }
 
