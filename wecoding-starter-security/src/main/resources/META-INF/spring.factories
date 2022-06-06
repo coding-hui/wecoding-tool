@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   top.wecoding.core.security.config.TokenConfiguration,\
-  top.wecoding.core.security.config.SecureConfiguration,\
-  top.wecoding.core.security.config.RegistryConfiguration
+  top.wecoding.core.security.config.RegistryConfiguration,\
+  top.wecoding.core.security.config.SecurityConfiguration

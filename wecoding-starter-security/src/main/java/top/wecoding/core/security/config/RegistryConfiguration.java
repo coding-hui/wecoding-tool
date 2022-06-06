@@ -29,7 +29,7 @@ import top.wecoding.core.security.registry.SecurityRegistry;
  */
 @Order
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore(SecureConfiguration.class)
+@AutoConfigureBefore(SecurityConfiguration.class)
 public class RegistryConfiguration {
 
     /**
