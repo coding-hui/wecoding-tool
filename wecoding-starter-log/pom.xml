@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>wecoding-starter-log</artifactId>
+    <name>${project.artifactId}</name>
 
     <description>
         WeCoding 日志服务
