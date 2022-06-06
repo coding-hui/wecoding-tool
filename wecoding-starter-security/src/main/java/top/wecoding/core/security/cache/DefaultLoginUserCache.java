@@ -16,22 +16,14 @@
 package top.wecoding.core.security.cache;
 
 import top.wecoding.core.auth.model.LoginUser;
-import top.wecoding.core.cache.base.CacheOperator;
+import top.wecoding.core.cache.base.BaseRedisCacheOperator;
 
 /**
- * 登录用户信息缓存
+ * 默认登录用户信息使用 Redis
  *
  * @author liuyuhui
- * @date 2022/5/18
+ * @date 2022/6/6
  * @qq 1515418211
  */
-public interface LoginUserCache extends CacheOperator<String, LoginUser> {
-
-    String LOGIN_USER_CACHE = "login_user:";
-
-    @Override
-    default String getKeyPrefix() {
-        return LOGIN_USER_CACHE;
-    }
-
+public class DefaultLoginUserCache extends BaseRedisCacheOperator<LoginUser> implements LoginUserCache {
 }

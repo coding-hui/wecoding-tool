@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import top.wecoding.core.jwt.props.JwtProperties;
+import top.wecoding.core.security.cache.DefaultLoginUserCache;
 import top.wecoding.core.security.cache.LoginUserCache;
 import top.wecoding.core.security.service.TokenService;
 
@@ -51,7 +52,7 @@ public class TokenConfiguration {
     @Bean
     @ConditionalOnMissingBean(LoginUserCache.class)
     public LoginUserCache loginUserCache() {
-        return new LoginUserCache();
+        return new DefaultLoginUserCache();
     }
 
 }

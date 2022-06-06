@@ -55,7 +55,7 @@ public enum ClientErrorCodeEnum implements BaseErrorCode {
     JWT_SIGNATURE_ERROR("0222", "非法身份令牌，无效签名"),
     JWT_TOKEN_IS_EMPTY("0223", "身份令牌为空"),
     JWT_PARSE_TOKEN_ERROR("0224", "解析身份令牌错误"),
-    NO_LOGIN_USER("0230", "无登录用户"),
+    NO_LOGIN_USER("0230", "未登录"),
 
     ACCESS_PERMISSION_ERROR("0300", "访问权限异常"),
     DEMO_EXP_ERROR("0310", "演示环境，无法操作"),

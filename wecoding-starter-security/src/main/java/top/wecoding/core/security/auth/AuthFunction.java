@@ -15,6 +15,8 @@
  */
 package top.wecoding.core.security.auth;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 import top.wecoding.core.auth.model.LoginUser;
@@ -40,12 +42,16 @@ public class AuthFunction {
      * @return {boolean}
      */
     public boolean requiresLogin() {
-        try {
-            AuthUtil.getLoginUser();
-            return true;
-        } catch (Exception e) {
+        String token = AuthUtil.getToken();
+        if (StrUtil.isBlank(token)) {
+            throw new UnauthorizedException(ClientErrorCodeEnum.JWT_TOKEN_IS_EMPTY);
+        }
+        LoginUser loginUser = AuthUtil.getLoginUser();
+        if (ObjectUtil.isNull(loginUser)) {
             throw new UnauthorizedException(ClientErrorCodeEnum.NO_LOGIN_USER);
         }
+
+        return true;
     }
 
     /**
@@ -89,7 +95,7 @@ public class AuthFunction {
                 return true;
             }
         }
-        return false;
+        throw new UnauthorizedException(ClientErrorCodeEnum.NO_PERMISSION);
     }
 
     /**
@@ -115,7 +121,7 @@ public class AuthFunction {
                 return true;
             }
         }
-        return false;
+        throw new UnauthorizedException(ClientErrorCodeEnum.NO_PERMISSION);
     }
 
     /**

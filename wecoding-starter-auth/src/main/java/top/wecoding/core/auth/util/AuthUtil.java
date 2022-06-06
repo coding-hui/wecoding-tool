@@ -15,6 +15,7 @@
  */
 package top.wecoding.core.auth.util;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.constant.TokenConstant;
 import top.wecoding.core.context.security.SecurityContextHolder;
 import top.wecoding.core.enums.UserTypeEnum;
+import top.wecoding.core.exception.code.ClientErrorCodeEnum;
+import top.wecoding.core.exception.user.UnauthorizedException;
+import top.wecoding.core.util.HttpServletUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -92,6 +96,14 @@ public class AuthUtil {
     public boolean isUserType(UserTypeEnum userTypeEnum) {
         String userType = getLoginUser().getUserType();
         return userTypeEnum.eq(userType);
+    }
+
+    public String getToken() {
+        HttpServletRequest request = HttpServletUtils.getRequest();
+        if (ObjectUtil.isNull(request)) {
+            throw new UnauthorizedException(ClientErrorCodeEnum.VALID_TOKEN_ERROR);
+        }
+        return getToken(request);
     }
 
     /**
