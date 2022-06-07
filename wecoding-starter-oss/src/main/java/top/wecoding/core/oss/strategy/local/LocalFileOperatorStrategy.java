@@ -19,6 +19,8 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.exception.Assert;
+import top.wecoding.core.exception.BizException;
+import top.wecoding.core.exception.code.SystemErrorCodeEnum;
 import top.wecoding.core.oss.enums.FileStorageTypeEnum;
 import top.wecoding.core.oss.model.*;
 import top.wecoding.core.oss.props.FileStorageProperties;
@@ -104,7 +106,11 @@ public class LocalFileOperatorStrategy extends AbstractFileOperatorStrategy {
         Assert.notBlank(bucket, "文件存储桶不能为空");
         Assert.notBlank(path, "文件存储位置不能为空");
 
-        return FileUtil.readBytes(getAbsoluteFile(local.getStoragePath(), bucket, path));
+        try {
+            return FileUtil.readBytes(getAbsoluteFile(local.getStoragePath(), bucket, path));
+        } catch (Exception e) {
+            throw new BizException(SystemErrorCodeEnum.FILE_ERROR);
+        }
     }
 
     /**
