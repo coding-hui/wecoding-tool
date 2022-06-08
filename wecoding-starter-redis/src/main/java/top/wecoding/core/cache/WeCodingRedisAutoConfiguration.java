@@ -55,17 +55,17 @@ import java.time.Duration;
 @ConditionalOnClass(RedisConnectionFactory.class)
 @AutoConfigureBefore(RedisAutoConfiguration.class)
 @EnableConfigurationProperties(CacheProperties.class)
-public class RedisAutoConfigure extends CachingConfigurerSupport {
+public class WeCodingRedisAutoConfiguration extends CachingConfigurerSupport {
 
     private final CacheProperties cacheProperties;
 
-    @Bean("redisService")
+    @Bean
     @ConditionalOnMissingBean
     public RedisService redisService(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
         return new RedisService(redisTemplate, stringRedisTemplate);
     }
 
-    @Bean("redisValueSerializer")
+    @Bean
     public RedisSerializer<Object> redisValueSerializer() {
         return CreateRedisTemplateFactory.redisValueSerializer();
     }
@@ -75,7 +75,7 @@ public class RedisAutoConfigure extends CachingConfigurerSupport {
         return CreateRedisTemplateFactory.createObject(connectionFactory);
     }
 
-    @Bean("stringRedisTemplate")
+    @Bean
     public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory connectionFactory) {
         return CreateRedisTemplateFactory.createString(connectionFactory);
     }

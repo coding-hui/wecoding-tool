@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  top.wecoding.core.cache.RedisAutoConfigure
+  top.wecoding.core.cache.WeCodingRedisAutoConfiguration
