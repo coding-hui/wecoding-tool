@@ -76,6 +76,7 @@ public class WeCodingRedisAutoConfiguration extends CachingConfigurerSupport {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory connectionFactory) {
         return CreateRedisTemplateFactory.createString(connectionFactory);
     }
