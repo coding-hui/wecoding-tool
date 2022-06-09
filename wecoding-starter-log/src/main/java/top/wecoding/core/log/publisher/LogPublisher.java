@@ -115,7 +115,7 @@ public class LogPublisher {
     public static void publishExceptionEvent(Log log, long time, JoinPoint joinPoint, Exception e) {
         SysOpLog opLog = genRequestSysOpLog();
         opLog.setTime(time)
-                .setType(VisLogTypeEnum.LOGIN_ERROR.getCode())
+                .setType(LogTypeEnum.ERROR.getType())
                 .setParams(getRequestParams(joinPoint))
                 .setMethod(getClassName(joinPoint))
                 .setBusinessType(log.businessType().ordinal())
