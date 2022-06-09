@@ -21,9 +21,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import top.wecoding.core.log.aspect.LogAspect;
-import top.wecoding.core.log.event.ExitLogListener;
-import top.wecoding.core.log.event.LoginLogListener;
-import top.wecoding.core.log.event.OperationLogListener;
+import top.wecoding.core.log.event.listener.ExitLogListener;
+import top.wecoding.core.log.event.listener.LoginLogListener;
+import top.wecoding.core.log.event.listener.OperationLogListener;
 import top.wecoding.core.log.feign.RemoteLogService;
 
 /**

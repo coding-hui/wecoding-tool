@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.log.event;
+package top.wecoding.core.log.event.listener;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +22,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import top.wecoding.core.constant.SecurityConstants;
 import top.wecoding.core.log.entity.SysOpLog;
+import top.wecoding.core.log.event.OperationLogEvent;
 import top.wecoding.core.log.feign.RemoteLogService;
 
 /**

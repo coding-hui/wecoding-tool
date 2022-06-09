@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.log.event;
+package top.wecoding.core.log.event.listener;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +21,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import top.wecoding.core.constant.SecurityConstants;
+import top.wecoding.core.log.entity.SysLoginLog;
+import top.wecoding.core.log.event.LoginLogEvent;
 import top.wecoding.core.log.feign.RemoteLogService;
-
-import java.util.List;
 
 /**
  * @author liuyuhui
@@ -31,16 +31,16 @@ import java.util.List;
  */
 @Slf4j
 @AllArgsConstructor
-public class ExitLogListener {
+public class LoginLogListener {
 
     private final RemoteLogService remoteLogService;
 
     @Async
     @Order
-    @EventListener(ExitLogEvent.class)
-    public void saveSysLoginLog(ExitLogEvent event) {
-        List<String> userKeys = event.getUserKeys();
-        remoteLogService.saveLogoutLog(userKeys, SecurityConstants.INNER);
+    @EventListener(LoginLogEvent.class)
+    public void saveSysLoginLog(LoginLogEvent event) {
+        SysLoginLog sysLoginLog = event.getSysLoginLog();
+        remoteLogService.saveLoginLog(sysLoginLog, SecurityConstants.INNER);
     }
 
 }
