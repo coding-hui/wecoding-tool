@@ -15,6 +15,7 @@
  */
 package top.wecoding.core.mybatis.handler;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
@@ -45,10 +46,16 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         try {
             // 设置createUser(BaseEntity)
-            this.strictInsertFill(metaObject, CREATE_USER, this::getLoginUserName, String.class);
+            Object createUser = metaObject.getValue(CREATE_USER);
+            if (ObjectUtil.isNull(createUser)) {
+                this.strictInsertFill(metaObject, CREATE_USER, this::getLoginUserName, String.class);
+            }
 
             // 设置createTime(BaseEntity)
-            this.strictInsertFill(metaObject, CREATE_TIME, Date::new, Date.class);
+            Object createTime = metaObject.getValue(CREATE_TIME);
+            if (ObjectUtil.isNull(createTime)) {
+                this.strictInsertFill(metaObject, CREATE_TIME, Date::new, Date.class);
+            }
         } catch (ReflectionException e) {
             log.warn(">>> CustomMetaObjectHandler 处理过程中无相关字段，不做处理");
         }
