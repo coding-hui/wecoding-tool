@@ -20,7 +20,7 @@ import cn.hutool.core.util.StrUtil;
 import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.exception.Assert;
 import top.wecoding.core.exception.BizException;
-import top.wecoding.core.exception.code.SystemErrorCodeEnum;
+import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.oss.enums.FileStorageTypeEnum;
 import top.wecoding.core.oss.model.*;
 import top.wecoding.core.oss.props.FileStorageProperties;
@@ -109,7 +109,7 @@ public class LocalFileOperatorStrategy extends AbstractFileOperatorStrategy {
         try {
             return FileUtil.readBytes(getAbsoluteFile(local.getStoragePath(), bucket, path));
         } catch (Exception e) {
-            throw new BizException(SystemErrorCodeEnum.FILE_ERROR);
+            throw new BizException(ClientErrorCodeEnum.FILE_DOWNLOAD_ERROR);
         }
     }
 

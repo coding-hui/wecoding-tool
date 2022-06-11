@@ -30,7 +30,7 @@ import top.wecoding.core.constant.StrPool;
 import top.wecoding.core.exception.ArgumentException;
 import top.wecoding.core.exception.Assert;
 import top.wecoding.core.exception.BizException;
-import top.wecoding.core.exception.code.SystemErrorCodeEnum;
+import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 import top.wecoding.core.oss.model.FileInfoResult;
 import top.wecoding.core.oss.model.StorageFileRequest;
 import top.wecoding.core.oss.props.FileStorageProperties;
@@ -69,7 +69,7 @@ public abstract class AbstractFileOperatorStrategy implements FileOperatorStrate
             throw e;
         } catch (Exception e) {
             log.error(" >>> 上传文件错误:", e);
-            throw BizException.wrap(SystemErrorCodeEnum.FILE_UPLOAD_ERROR, e);
+            throw BizException.wrap(ClientErrorCodeEnum.FILE_UPLOAD_ERROR, e);
         }
     }
 
@@ -177,21 +177,21 @@ public abstract class AbstractFileOperatorStrategy implements FileOperatorStrate
         String filename = FileNameUtil.getName(key);
         int fileNameLen = filename.length();
         if (fileNameLen > fileStorageProperties.getFileNameMax()) {
-            throw new BizException(SystemErrorCodeEnum.FILE_UPLOAD_ERROR
+            throw new BizException(ClientErrorCodeEnum.FILE_UPLOAD_ERROR
                     .build("文件名称长度不可超过{}", fileStorageProperties.getFileNameMax()));
         }
 
         // 文件大小校验
         long size = ObjectUtil.isNull(file) ? inputStream.available() : file.length();
         if (size > fileStorageProperties.getMaxSize()) {
-            throw BizException.wrap(SystemErrorCodeEnum.FILE_UPLOAD_ERROR
+            throw BizException.wrap(ClientErrorCodeEnum.FILE_UPLOAD_ERROR
                     .build("文件大小不可超过{}M", (fileStorageProperties.getMaxSize() / 1024 / 1024)));
         }
 
         // 文件类型检验
         String extension = FileNameUtil.getSuffix(key);
         if (!isAllowedExtension(extension, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION)) {
-            throw BizException.wrap(SystemErrorCodeEnum.FILE_TYPE_NOT_ALLOWED
+            throw BizException.wrap(ClientErrorCodeEnum.FILE_TYPE_NOT_ALLOWED
                     .build("不可上传.{}类型文件", extension));
         }
     }

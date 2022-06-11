@@ -47,12 +47,10 @@ public enum SystemErrorCodeEnum implements BaseErrorCode {
     SYSTEM_THREAT_POOL_EMPTY("0220", "系统线程池耗尽"),
     ACCESS_RESOURCES_ERROR("0220", "系统资源访问异常"),
 
-    SQL_ERROR("0300", "运行SQL异常"),
-
-    FILE_ERROR("0400", "获取上传文件错误"),
-    FILE_UPLOAD_ERROR("0410", "文件上传错误"),
-    FILE_TYPE_NOT_ALLOWED("0420", "不可上传该类型文件"),
-    FILE_DOWNLOAD_ERROR("0430", "文件下载错误");
+    /**
+     * SQL异常 二级宏观错误码
+     */
+    SQL_ERROR("0300", "运行SQL异常");
 
     private final String errorCode;
 

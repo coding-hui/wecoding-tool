@@ -19,7 +19,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.URLUtil;
 import lombok.extern.slf4j.Slf4j;
 import top.wecoding.core.exception.BizException;
-import top.wecoding.core.exception.code.SystemErrorCodeEnum;
+import top.wecoding.core.exception.code.ClientErrorCodeEnum;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class DownloadUtil {
             IoUtil.write(response.getOutputStream(), true, fileBytes);
         } catch (IOException e) {
             log.error(">>> 下载文件异常:", e);
-            throw new BizException(SystemErrorCodeEnum.FILE_DOWNLOAD_ERROR);
+            throw new BizException(ClientErrorCodeEnum.FILE_DOWNLOAD_ERROR);
         }
     }
 

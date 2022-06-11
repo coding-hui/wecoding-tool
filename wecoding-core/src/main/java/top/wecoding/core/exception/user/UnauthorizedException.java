@@ -33,7 +33,7 @@ public class UnauthorizedException extends BaseUncheckedException {
     }
 
     public UnauthorizedException(String errorMessage) {
-        super(ClientErrorCodeEnum.LOGIN_ERROR, errorMessage);
+        super(ClientErrorCodeEnum.NO_PERMISSION_OPERATE, errorMessage);
     }
 
     public UnauthorizedException(BaseErrorCode errorCode, String errorMessage) {
