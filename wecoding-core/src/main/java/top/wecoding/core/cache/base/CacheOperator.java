@@ -15,9 +15,11 @@
  */
 package top.wecoding.core.cache.base;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * 规范缓存操作
@@ -74,14 +76,14 @@ public interface CacheOperator<T> {
      *
      * @param keys 键
      */
-    void del(String... keys);
+    Long del(String... keys);
 
     /**
      * 删除缓存
      *
      * @param keys 键，多个
      */
-    void del(Collection<String> keys);
+    Long del(Collection<String> keys);
 
     /**
      * 清空所有存储的数据，危险操作!!!
@@ -153,5 +155,35 @@ public interface CacheOperator<T> {
      * @return 缓存前缀
      */
     String getKeyPrefix();
+
+    /**
+     * 获取加前缀的 key
+     *
+     * @param key 给定的 key
+     * @return prefix + key
+     */
+    default String getKey(String key) {
+        return getKeyPrefix() + key;
+    }
+
+    /**
+     * 获取加前缀的 key
+     *
+     * @param keys 给定的 keys
+     * @return prefix + key
+     */
+    default List<String> getKeys(String... keys) {
+        return Arrays.stream(keys).map(k -> getKeyPrefix() + k).collect(Collectors.toList());
+    }
+
+    /**
+     * 获取加前缀的 key
+     *
+     * @param keys 给定的 keys
+     * @return prefix + key
+     */
+    default List<String> getKeys(Collection<String> keys) {
+        return keys.stream().map(k -> getKeyPrefix() + k).collect(Collectors.toList());
+    }
 
 }

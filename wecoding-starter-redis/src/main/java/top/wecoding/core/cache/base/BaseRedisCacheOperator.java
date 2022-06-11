@@ -37,37 +37,37 @@ public abstract class BaseRedisCacheOperator<T> implements CacheOperator<T> {
 
     @Override
     public void set(String key, T object) {
-        redisService.set(key, object);
+        redisService.set(getKey(key), object);
     }
 
     @Override
     public void set(String key, T object, long timeout) {
-        redisService.set(key, object, timeout);
+        redisService.set(getKey(key), object, timeout);
     }
 
     @Override
     public T get(String key) {
-        return redisService.get(key);
+        return redisService.get(getKey(key));
     }
 
     @Override
     public T get(String key, Supplier<T> loader) {
-        return redisService.get(key, loader);
+        return redisService.get(getKey(key), loader);
     }
 
     @Override
     public List<T> find(Collection<String> keys) {
-        return redisService.mGet(keys);
+        return redisService.mGet(getKeys(keys));
     }
 
     @Override
-    public void del(String... keys) {
-        redisService.del(keys);
+    public Long del(String... keys) {
+        return redisService.del(getKeys(keys));
     }
 
     @Override
-    public void del(Collection<String> keys) {
-        redisService.del(keys);
+    public Long del(Collection<String> keys) {
+        return redisService.del(getKeys(keys));
     }
 
     @Override
@@ -80,37 +80,37 @@ public abstract class BaseRedisCacheOperator<T> implements CacheOperator<T> {
 
     @Override
     public Boolean exists(String key) {
-        return redisService.hasKey(key);
+        return redisService.hasKey(getKey(key));
     }
 
     @Override
     public Long getCounter(String key) {
-        return redisService.getCounter(key);
+        return redisService.getCounter(getKey(key));
     }
 
     @Override
     public Long incr(String key) {
-        return redisService.incr(key);
+        return redisService.incr(getKey(key));
     }
 
     @Override
     public Long incrBy(String key, long delta) {
-        return redisService.incrBy(key, delta);
+        return redisService.incrBy(getKey(key), delta);
     }
 
     @Override
     public Double incrByFloat(String key, double delta) {
-        return redisService.incrByFloat(key, delta);
+        return redisService.incrByFloat(getKey(key), delta);
     }
 
     @Override
     public Long decr(String key) {
-        return redisService.decr(key);
+        return redisService.decr(getKey(key));
     }
 
     @Override
     public Long decrBy(String key, long delta) {
-        return redisService.decrBy(key, delta);
+        return redisService.decrBy(getKey(key), delta);
     }
 
 }
