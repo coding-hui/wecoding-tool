@@ -13,25 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.wecoding.core.security.cache;
+package top.wecoding.core.cache.base;
 
-import top.wecoding.core.auth.model.LoginUser;
-import top.wecoding.core.cache.base.CacheOperator;
+import lombok.Data;
+import org.springframework.lang.NonNull;
+
+import java.time.Duration;
 
 /**
- * 登录用户信息缓存
+ * 缓存 Key 封装
  *
  * @author liuyuhui
- * @date 2022/5/18
+ * @date 2022/6/9
  * @qq 1515418211
  */
-public interface LoginUserCache extends CacheOperator<LoginUser> {
+@Data
+public class CacheKey {
 
-    String LOGIN_USER_CACHE = "login_user:";
+    /**
+     * 缓存 Key
+     */
+    @NonNull
+    private final String key;
 
-    @Override
-    default String getKeyPrefix() {
-        return LOGIN_USER_CACHE;
+    /**
+     * 超时时间/秒
+     */
+    private Duration expire;
+
+    public CacheKey(@NonNull final String key) {
+        this.key = key;
+    }
+
+    public CacheKey(@NonNull String key, Duration expire) {
+        this.key = key;
+        this.expire = expire;
     }
 
 }

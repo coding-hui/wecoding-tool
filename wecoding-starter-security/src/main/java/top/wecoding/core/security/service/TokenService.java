@@ -136,7 +136,7 @@ public class TokenService {
      * @param loginUser 登录用户信息
      */
     public void cacheLoginUser(LoginUser loginUser) {
-        loginUserCache.put(loginUser.getUuid(), loginUser, 2 * 60 * 3600);
+        loginUserCache.set(loginUser.getUuid(), loginUser, 2 * 60 * 3600);
     }
 
     /**
@@ -148,7 +148,7 @@ public class TokenService {
         if (StrUtil.isBlank(token)) {
             return;
         }
-        loginUserCache.remove(JwtUtils.getUserKey(token));
+        loginUserCache.del(JwtUtils.getUserKey(token));
     }
 
     /**

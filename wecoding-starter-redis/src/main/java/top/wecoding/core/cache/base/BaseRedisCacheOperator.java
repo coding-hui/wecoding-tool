@@ -15,15 +15,14 @@
  */
 package top.wecoding.core.cache.base;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisCallback;
 import top.wecoding.core.cache.service.RedisService;
-import top.wecoding.core.constant.StrPool;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * @author liuyuhui
@@ -31,93 +30,87 @@ import java.util.stream.Collectors;
  * @qq 1515418211
  */
 @Slf4j
-public abstract class BaseRedisCacheOperator<V> implements CacheOperator<String, V> {
+public abstract class BaseRedisCacheOperator<T> implements CacheOperator<T> {
 
     @Resource
     private RedisService redisService;
 
     @Override
-    public void put(String key, V object) {
-        redisService.set(getKeyPrefix() + key, object);
+    public void set(String key, T object) {
+        redisService.set(key, object);
     }
 
     @Override
-    public void put(String key, V object, long timeout) {
-        redisService.set(getKeyPrefix() + key, object, timeout);
+    public void set(String key, T object, long timeout) {
+        redisService.set(key, object, timeout);
     }
 
     @Override
-    public V get(String key) {
-        return redisService.get(getKeyPrefix() + key);
+    public T get(String key) {
+        return redisService.get(key);
     }
 
     @Override
-    public void clear() {
-        Set<String> keys = redisService.keys(getKeyPrefix() + StrPool.ASTERISK);
-        if (keys != null) {
-            redisService.del(keys);
-        }
+    public T get(String key, Supplier<T> loader) {
+        return redisService.get(key, loader);
     }
 
     @Override
-    public void remove(String key) {
-        remove(Collections.singleton(key));
-    }
-
-    @Override
-    public void remove(Collection<String> keys) {
-        List<String> withPrefixKeys = keys.stream().map(i -> getKeyPrefix() + i).collect(Collectors.toList());
-        redisService.del(withPrefixKeys);
-    }
-
-    @Override
-    public int size() {
-        Set<String> keys = redisService.keys(getKeyPrefix() + StrPool.ASTERISK);
-        if (keys == null) {
-            return 0;
-        }
-        return keys.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.size() <= 0;
-    }
-
-    @Override
-    public boolean containsKey(String key) {
-        return Boolean.TRUE.equals(redisService.hasKey(key));
-    }
-
-    @Override
-    public Set<String> keySet() {
-        Set<String> keys = redisService.keys(getKeyPrefix() + StrPool.ASTERISK);
-        if (keys == null) {
-            return CollectionUtil.newHashSet();
-        }
-        return keys.stream()
-                .map(key -> StrUtil.removePrefix(key, getKeyPrefix()))
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public Collection<V> values() {
-        Set<String> keys = this.keySet();
-        if (keys == null) {
-            return CollectionUtil.newArrayList();
-        }
-
+    public List<T> find(Collection<String> keys) {
         return redisService.mGet(keys);
     }
 
     @Override
-    public Map<String, V> getAllKeyValues() {
-        Collection<String> allKeys = this.keySet();
-        HashMap<String, V> results = new HashMap<>();
-        for (String key : allKeys) {
-            results.put(key, this.get(key));
-        }
-        return results;
+    public void del(String... keys) {
+        redisService.del(keys);
+    }
+
+    @Override
+    public void del(Collection<String> keys) {
+        redisService.del(keys);
+    }
+
+    @Override
+    public void flushDb() {
+        redisService.getRedisTemplate().execute((RedisCallback<String>) connection -> {
+            connection.flushDb();
+            return "ok";
+        });
+    }
+
+    @Override
+    public Boolean exists(String key) {
+        return redisService.hasKey(key);
+    }
+
+    @Override
+    public Long getCounter(String key) {
+        return redisService.getCounter(key);
+    }
+
+    @Override
+    public Long incr(String key) {
+        return redisService.incr(key);
+    }
+
+    @Override
+    public Long incrBy(String key, long delta) {
+        return redisService.incrBy(key, delta);
+    }
+
+    @Override
+    public Double incrByFloat(String key, double delta) {
+        return redisService.incrByFloat(key, delta);
+    }
+
+    @Override
+    public Long decr(String key) {
+        return redisService.decr(key);
+    }
+
+    @Override
+    public Long decrBy(String key, long delta) {
+        return redisService.decrBy(key, delta);
     }
 
 }

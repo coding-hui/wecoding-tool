@@ -9,15 +9,15 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY StringIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package top.wecoding.core.cache.base;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * 规范缓存操作
@@ -25,7 +25,7 @@ import java.util.Set;
  * @author liuyuhui
  * @qq 1515418211
  */
-public interface CacheOperator<K, V> {
+public interface CacheOperator<T> {
 
     /**
      * 将对象加入到缓存
@@ -33,7 +33,7 @@ public interface CacheOperator<K, V> {
      * @param key    键
      * @param object 缓存的对象
      */
-    void put(K key, V object);
+    void set(String key, T object);
 
     /**
      * 将对象加入到缓存，使用指定失效时长
@@ -42,7 +42,7 @@ public interface CacheOperator<K, V> {
      * @param object  缓存的对象
      * @param timeout 失效时长，单位毫秒
      */
-    void put(K key, V object, long timeout);
+    void set(String key, T object, long timeout);
 
     /**
      * 从缓存中获得对象
@@ -50,69 +50,102 @@ public interface CacheOperator<K, V> {
      * @param key 键
      * @return 键对应的对象
      */
-    V get(K key);
+    T get(String key);
 
     /**
-     * 清空缓存
+     * 从缓存中获得对象，不存在时，put 后返回
+     *
+     * @param key    键
+     * @param loader 加载器
+     * @return 键对应的对象
      */
-    void clear();
+    T get(String key, Supplier<T> loader);
+
+    /**
+     * 根据指定缓存 keys 获得对象
+     *
+     * @param keys 键
+     * @return 不存在时，返回空集合
+     */
+    List<T> find(Collection<String> keys);
 
     /**
      * 从缓存中移除对象
      *
-     * @param key 键
+     * @param keys 键
      */
-    void remove(K key);
+    void del(String... keys);
 
     /**
      * 删除缓存
      *
      * @param keys 键，多个
      */
-    void remove(Collection<K> keys);
+    void del(Collection<String> keys);
 
     /**
-     * 缓存的对象数量
-     *
-     * @return 缓存的对象数量
+     * 清空所有存储的数据，危险操作!!!
      */
-    int size();
-
-    /**
-     * 缓存是否为空
-     *
-     * @return 缓存是否为空
-     */
-    boolean isEmpty();
+    void flushDb();
 
     /**
      * 是否包含key
      *
-     * @param key KEY
-     * @return 是否包含key
+     * @param key key
+     * @return 是否存在
      */
-    boolean containsKey(K key);
+    Boolean exists(String key);
 
     /**
-     * 获得缓存的所有 key 列表
+     * 获取 key 中存放的 Long 值
      *
-     * @return all kes
+     * @param key 键
+     * @return key中存储的的数字
      */
-    Set<K> keySet();
+    Long getCounter(String key);
 
     /**
-     * 返回所有键
+     * 为键 key 储存的数字值加上一。
      *
-     * @return 所有键
+     * @param key 键
+     * @return 递增结果
      */
-    Collection<V> values();
+    Long incr(String key);
 
     /**
-     * 获取所有的 key,value
+     * 为键 key 储存的数字值加上 delta
      *
-     * @return 键值 map
+     * @param key   键
+     * @param delta 增量值
+     * @return 递增结果
      */
-    Map<K, V> getAllKeyValues();
+    Long incrBy(String key, long delta);
+
+    /**
+     * 为键 key 储存的数字值加上 delta
+     *
+     * @param key   键
+     * @param delta 增量值
+     * @return 递增结果
+     */
+    Double incrByFloat(String key, double delta);
+
+    /**
+     * 为键 key 储存的数字值减去一
+     *
+     * @param key 键
+     * @return 递减结果
+     */
+    Long decr(String key);
+
+    /**
+     * 将 key 所储存的值减去减量 delta
+     *
+     * @param key   键
+     * @param delta 增量值
+     * @return 递减结果
+     */
+    Long decrBy(String key, long delta);
 
     /**
      * 缓存的前缀
