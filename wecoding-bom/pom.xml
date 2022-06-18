@@ -43,6 +43,19 @@
         <git.commit.plugin>2.2.5</git.commit.plugin>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>WeCoding Releases</name>
+            <url>http://wecoding.top:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>WeCoding Snapshots</id>
+            <name>Snapshot</name>
+            <url>http://wecoding.top:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
 
