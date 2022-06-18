@@ -1,9 +1,9 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">WeCodingCloud</h1>
-<h4 align="center">基于 Vue3 和 Spring Boot/Spring Cloud & Alibaba 前后端分离的分布式微服务架构</h4>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">WeCodingTool</h1>
+<h4 align="center">Spring Boot/Spring Cloud 快速开发工具包</h4>
 
 ## 平台简介
 
-* 采用前后端分离的模式，微服务版本前端(基于 [WeCoding-Vue](git@gitee.com:coder-hui/wecoding-vue.git))。
+* 采用前后端分离的模式，微服务版本前端(基于 [WeCoding-Vue](https://github.com/coding-hui/wecoding-vue.git))。
 * 后端采用Spring Boot、Spring Cloud & Alibaba。
 * 注册中心、配置中心选型Nacos，权限认证使用Redis。
 * 流量控制框架选型Sentinel，分布式事务选型Seata。
@@ -12,65 +12,31 @@
 
 ~~~
 top.wecoding   
-├── wecoding-auth            // 认证中心 [9000]
-├── wecoding-gateway         // 网关模块 [8080]
-├── wecoding-api             // 接口模块
-│       └── wecoding-system-api                          // 系统接口
-├── wecoding-common          // 通用模块
-│       └── wecoding-common-core                         // 核心模块
-│       └── wecoding-common-cache                        // 缓存服务
-│       └── wecoding-common-datasource                   // 多数据源
-│       └── wecoding-common-feign                        // 权限范围
-│       └── wecoding-common-log                          // 日志记录
-│       └── wecoding-common-mybatis                      // Mybatis支持
-│       └── wecoding-common-rabbit                       // Rabbit支持
-│       └── wecoding-common-rocketmq                     // Rocketmq支持
-│       └── wecoding-common-security                     // 安全模块
-│       └── wecoding-common-swagger                      // 系统接口
-│       └── wecoding-common-web                          // Web支持
-├── wecoding-service        // 业务模块
-│       └── wecoding-gen                                 // 代码生成 [9400]
-│       └── wecoding-file                                // 文件服务 [9300]
-│       └── wecoding-system                              // 系统模块 [9201]
-├── wecoding-visual         // 图形化管理模块
-│       └── wecoding-monitor                          // 监控中心 [9100]
-├── wecoding-vue            // 前端框架 [80]
-├──pom.xml                  // 公共依赖
+├── wecoding-bom                // 依赖聚合模块        
+├── wecoding-core               // 核心通用模块      
+├── wecoding-database           // 数据库依赖         
+├── wecoding-starter-auth       // 认证信息模块
+├── wecoding-starter-boot       // spring boot 启动聚合模块
+├── wecoding-starter-caffeine   // caffeine 缓存封装
+├── wecoding-starter-cloud      // 微服务组件封装
+├── wecoding-starter-jwt        // Jwt Token 封装
+├── wecoding-starter-log        // 日志记录
+├── wecoding-starter-mongo      // mongodb 封装
+├── wecoding-starter-mybatis    // mybatis 配置
+├── wecoding-starter-oss        // oss 存储模块
+├── wecoding-starter-redis      // 通用 redis 配置
+├── wecoding-starter-security   // 权限校验
+├── wecoding-starter-swagger    // 接口文档
+├── wecoding-starter-test       // 系统测试依赖
+├── wecoding-starter-web        // web 配置
+├──pom.xml                      // 项目父 pom
 ~~~
-
-## 架构图
-
-<img src="https://oscimg.oschina.net/oscnet/up-82e9722ecb846786405a904bafcf19f73f3.png"/>
-
-## 内置功能
-
-1. 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2. 部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
-3. 岗位管理：配置系统用户所属担任职务。
-4. 菜单管理：配置系统菜单，操作权限，按钮权限标识等。
-5. 角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
-6. 字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-7. 参数管理：对系统动态配置常用参数。
-8. 通知公告：系统通知公告信息发布维护。
-9. 操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
-10. 登录日志：系统登录日志记录查询包含登录异常。
-11. 在线用户：当前系统中活跃用户状态监控。
-12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
-13. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
-14. 系统接口：根据业务代码自动生成相关的api接口文档。
-15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
-16. 在线构建器：拖动表单元素生成相应的HTML代码。
-17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
 ## 在线体验
 
 - wecoding/1234565
 - 演示地址：http://wecoding.top
 - 文档地址：开发中
-
-## 更新日志
-
-[CHANGELOG](./CHANGELOG.zh_CN.md)
 
 ## 项目地址
 
@@ -81,7 +47,7 @@ top.wecoding
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://gitee.com/coder-hui/wecoding-cloud/issues) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://github.com/coding-hui/wecoding-tool/issues) 或者提交一个 Pull Request。
 
 **Pull Request:**
 
